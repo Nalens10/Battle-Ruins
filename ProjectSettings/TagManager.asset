@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Map
+    uniqueID: 730491783
+    locked: 0
+  - name: Markers
+    uniqueID: 2425542825
+    locked: 0
+  - name: Creatures
+    uniqueID: 1493642445
+    locked: 0
+  - name: VFX
+    uniqueID: 3574550817
+    locked: 0
+  - name: UI
+    uniqueID: 3714823113
+    locked: 0
