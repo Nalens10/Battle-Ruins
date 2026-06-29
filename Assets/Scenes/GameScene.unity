@@ -4564,7 +4564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f6e0f379ee878498c3c9262cd6bf4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitCreaturePrfb: {fileID: 1922257744384190501, guid: 6ba595143aaad234ebff8d7d95f0692f, type: 3}
+  unitCreaturePrfb: {fileID: 244593149139030731, guid: 2f889433075368946b0f47f6a842639c, type: 3}
   creatureCount: 3
   mapData: {fileID: 4900000, guid: b53db8b7d821fa64cbbbb8d64bf731da, type: 3}
 --- !u!1 &1542220218
