@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.003, y: -0.007, z: 0}
-  m_LocalScale: {x: 0.18432806, y: 0.18432806, z: 0.18432806}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8410373903688510315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -149,8 +149,15 @@ MonoBehaviour:
   localPosition: {x: 0, y: 0}
   selectionIndicator: {fileID: 8651478278439120990}
   movementSpeed: 6
-  speed: 8
-  maxEnergy: 2
+  master: {fileID: 0}
+  stats:
+    hp: 100
+    maxhp: 100
+    energy: 2
+    maxEnergy: 2
+    attack: 5
+    defense: 4
+    speed: 6
 --- !u!1 &8651478278439120990
 GameObject:
   m_ObjectHideFlags: 0

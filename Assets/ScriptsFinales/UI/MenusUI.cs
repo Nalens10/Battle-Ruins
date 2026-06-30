@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class UIMenuManager : MonoBehaviour
+public class MenusUI: MonoBehaviour
 {
     // Main Menu
     public void Play()

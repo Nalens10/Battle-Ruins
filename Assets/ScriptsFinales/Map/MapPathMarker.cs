@@ -12,7 +12,6 @@ public class MapPathMarker : MonoBehaviour
         this.Hide();
     }
 
-    // Muestra el marcador de ruta correspondiente al costo de la ruta
     public void SetColourUsingPathCost(int cost)
     {
         this.Hide();
@@ -20,7 +19,6 @@ public class MapPathMarker : MonoBehaviour
         this.markerSprites[cost % this.markerSprites.Length].SetActive(true);
     }
 
-    // Oculta todos los marcadores de ruta
     public void Hide()
     {
         foreach (var spr in this.markerSprites)

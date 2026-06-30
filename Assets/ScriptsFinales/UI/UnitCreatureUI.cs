@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 // Les dejo en verde lo que hace ;)
 
 public class UnitCreatureUI : MonoBehaviour
 {
-    
+
     public static UnitCreatureUI current;
 
     public GameObject[] energyBlocks;
+
+    public Slider healthSlider;
+
+    public TextMeshProUGUI atkLabel;
+    public TextMeshProUGUI defLabel;
+    public TextMeshProUGUI spdLabel;
 
     void Awake()
     {
@@ -18,27 +26,35 @@ public class UnitCreatureUI : MonoBehaviour
         this.Hide();
     }
 
+    public void DisplayStats(Stats stats)
+    {
+        this.DisplayEnergy(stats.energy);
+
+        this.healthSlider.value = stats.hp / (float)stats.maxhp;
+
+        this.atkLabel.text = stats.attack.ToString();
+        this.defLabel.text = stats.defense.ToString();
+        this.spdLabel.text = stats.speed.ToString();
+    }
+
     public void DisplayEnergy(int energy)
     {
-        // Oculta todos los bloques de energía
         foreach (var block in this.energyBlocks)
         {
             block.SetActive(false);
         }
-        // Muestra los bloques de energía correspondientes a la cantidad de energía actual
+
         for (int i = 0; i < energy; i++)
         {
             this.energyBlocks[i].SetActive(true);
         }
     }
 
-    // Muestra el UI de la criatura
     public void Show()
     {
         this.gameObject.SetActive(true);
     }
 
-    // Oculta el UI de la criatura
     public void Hide()
     {
         this.gameObject.SetActive(false);
