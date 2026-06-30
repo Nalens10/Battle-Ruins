@@ -10,7 +10,7 @@ public abstract class Master : MonoBehaviour
 
     protected List<UnitCreature> creatures = new List<UnitCreature>();
 
-    public void SpawnCreatures(List<Vector3> spawnPoints)
+    public void SpawnUnitCreatures(List<Vector3> spawnPoints)
     {
         foreach (var point in spawnPoints)
         {
@@ -32,7 +32,7 @@ public abstract class Master : MonoBehaviour
         UnitCreature unitCreature = go.GetComponent<UnitCreature>();
         unitCreature.master = this;
 
-        GameManager.current.EmplaceCreature(unitCreature, worldPosition);
+        GameManager.current.EmplaceUnitCreature(unitCreature, worldPosition);
 
         this.creatures.Add(unitCreature);
     }

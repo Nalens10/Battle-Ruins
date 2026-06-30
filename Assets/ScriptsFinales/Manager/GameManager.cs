@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.U2D.Animation;
 using UnityEngine;
 
@@ -25,22 +26,22 @@ public class GameManager : MonoBehaviour
         this.mapManager.Configure();
 
         Master player = this.GetComponentInChildren<PlayerMaster>();
-        Master ai = this.GetComponentInChildren<IAMaster>();
+        Master ia = this.GetComponentInChildren<IAMaster>();
 
-        this.masters = new Master[] { player, ai };
+        this.masters = new Master[] { player, ia };
 
-        player.SpawnCreatures(this.mapManager.playerSpawnPoints);
-        ai.SpawnCreatures(this.mapManager.iaSpawnPoints);
+        player.SpawnUnitCreatures(this.mapManager.playerSpawnPoints);
+        ia.SpawnUnitCreatures(this.mapManager.iaSpawnPoints);
 
         this.turnIndex = -1;
         this.NextTurn();
     }
 
-    public void EmplaceCreature(UnitCreature unitCreature, Vector3 worldPosition)
+    public void EmplaceUnitCreature(UnitCreature unitCreature, Vector3 worldPosition)
     {
         if (this.mapManager.IsAGroundTile(worldPosition) == false)
         {
-            throw new System.Exception("Invalid UnitCreature emplacement!");
+            throw new System.Exception("Invalid Creature emplacement!");
         }
 
         unitCreature.transform.position = this.mapManager.SnapToTile(worldPosition);
@@ -59,13 +60,13 @@ public class GameManager : MonoBehaviour
 
     public UnitCreature GetUnitCreatureAtPosition(Vector3 worldPosition)
     {
-        foreach (var unit in this.gameUnitCreatures)
+        foreach (var creature in this.gameUnitCreatures)
         {
-            float distance = Vector2.Distance(worldPosition, unit.transform.position);
+            float distance = Vector2.Distance(worldPosition, creature.transform.position);
 
             if (distance < 1f)
             {
-                return unit;
+                return creature;
             }
         }
 
@@ -76,7 +77,7 @@ public class GameManager : MonoBehaviour
     {
         if (this.IsOwnerOnTurn(unitCreature) == false)
         {
-            Debug.LogError("Cannot move this UnitCreature.");
+            Debug.LogError("Cannot move this creature.");
             return;
         }
 
@@ -84,9 +85,27 @@ public class GameManager : MonoBehaviour
         unitCreature.FollowPath(path.ToArray());
     }
 
-    public bool IsOwnerOnTurn(UnitCreature creature)
+    public void TryToPerformItemSkill(UnitCreature emitter, UnitCreature receiver, ItemSkill itemSkill)
+    {
+        if (this.IsOwnerOnTurn(emitter) == false)
+        {
+            Debug.LogError("It's not your turn!");
+            return;
+        }
+
+        if (emitter.CanExecuteItemSkill(itemSkill) == false)
+        {
+            Debug.LogError("Can't execute ItemSkill. No energy.");
+            return;
+        }
+
+        emitter.ConsumeEnergyFor(itemSkill);
+        itemSkill.Resolve(emitter, receiver);
+    }
+
+    public bool IsOwnerOnTurn(UnitCreature unitCreature)
     {
         Master currentMaster = this.masters[this.turnIndex];
-        return creature.master == currentMaster;
+        return unitCreature.master == currentMaster;
     }
 }

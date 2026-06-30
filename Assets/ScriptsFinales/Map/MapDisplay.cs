@@ -21,13 +21,18 @@ public class MapDisplay : MonoBehaviour
     public Camera gameCamera;
     public Transform cursor;
 
-    private UnitCreature selectedUnitCreature;
-
     // Marcadores de ruta.
     public GameObject pathMarkerPrfb;
     private List<MapPathMarker> pathMarkers = new List<MapPathMarker>();
 
     public Transform pathMarkerHolder;
+
+    private PlayerMaster playerMaster;
+
+    void Awake()
+    {
+        this.playerMaster = FindObjectOfType<PlayerMaster>();
+    }
 
     public void RenderMapData(Map mapdata)
     {
@@ -58,7 +63,7 @@ public class MapDisplay : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        if (InputManager.GetIfMouseHasMoved())
         {
             Vector3 world = this.gameCamera.ScreenToWorldPoint(Input.mousePosition);
 
@@ -73,58 +78,77 @@ public class MapDisplay : MonoBehaviour
             }
 
             if (
-                this.selectedUnitCreature != null &&
-                GameManager.current.IsOwnerOnTurn(this.selectedUnitCreature)
+                this.playerMaster.hasUnitCreatureSelected &&
+                GameManager.current.IsOwnerOnTurn(this.playerMaster.selectedUnitCreature)
             )
             {
-                List<Vector3> path = GameManager.current.mapManager.PredictWorldPathFor(
-                    this.selectedUnitCreature.transform.position, world
-                );
-
                 this.HideAllPathMarkers();
-                this.DisplayPredictedPath(path);
+
+                switch (this.playerMaster.status)
+                {
+                    case PlayerCombatStatus.MOVE:
+                        List<Vector3> path = GameManager.current.mapManager.PredictWorldPathFor(
+                            this.playerMaster.selectedUnitCreature.transform.position, world
+                        );
+
+                        this.DisplayPredictedPath(path);
+                        break;
+                    case PlayerCombatStatus.ITEMSKILL:
+                        List<Vector3> area = GameManager.current.mapManager.PredictAreaFor(
+                            this.playerMaster.selectedUnitCreature.transform.position,
+                            this.playerMaster.selectedItemSkill.range
+                        );
+
+                        this.DisplayPredictedArea(area);
+                        break;
+                }
+
             }
         }
 
-        if (Input.GetButtonDown("Fire1"))
+        if (InputManager.GetLeftClickDown())
         {
             this.HideAllPathMarkers();
 
             Vector3 world = this.gameCamera.ScreenToWorldPoint(Input.mousePosition);
-
-            if (this.selectedUnitCreature != null)
-            {
-                this.selectedUnitCreature.SetSelectionStatus(false);
-            }
-
-            this.selectedUnitCreature = GameManager.current.GetUnitCreatureAtPosition(world);
-            if (this.selectedUnitCreature != null)
-            {
-                this.selectedUnitCreature.SetSelectionStatus(true);
-            }
+            this.playerMaster.OnSelectionRequested(world);
         }
 
-        if (Input.GetButtonDown("Fire2") && this.selectedUnitCreature != null)
+        if (InputManager.GetRightClickDown() && this.playerMaster.hasUnitCreatureSelected)
         {
-            Vector3 world = this.gameCamera.ScreenToWorldPoint(Input.mousePosition);
-
             this.HideAllPathMarkers();
-            GameManager.current.MoveUnitCreatureTo(this.selectedUnitCreature, world);
+
+            Vector3 world = this.gameCamera.ScreenToWorldPoint(Input.mousePosition);
+            this.playerMaster.OnMoveOrItemSkillRequested(world);
         }
     }
 
     private void DisplayPredictedPath(List<Vector3> path)
     {
-        int mathMaxSteps = Mathf.Min(this.selectedUnitCreature.CurrentMaxDistance(), path.Count);
+        UnitCreature selected = this.playerMaster.selectedUnitCreature;
+
+        int mathMaxSteps = Mathf.Min(selected.CurrentMaxDistance(), path.Count);
 
         for (int i = 0; i < mathMaxSteps; i++)
         {
             MapPathMarker marker = this.GetMarkerByIndex(i);
 
-            int cost = this.selectedUnitCreature.GetEnergyCostForPathLength(i + 1);
+            int cost = selected.GetEnergyCostForPathLength(i + 1);
             marker.SetColourUsingPathCost(cost);
 
             marker.transform.position = path[i];
+        }
+    }
+
+    private void DisplayPredictedArea(List<Vector3> area)
+    {
+        for (int i = 0; i < area.Count; i++)
+        {
+            MapPathMarker marker = this.GetMarkerByIndex(i);
+
+            marker.SetColourUsingPathCost(1);
+
+            marker.transform.position = area[i];
         }
     }
 
