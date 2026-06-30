@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 // Les dejo en verde lo que hace ;)
@@ -25,6 +26,19 @@ public class UnitCreature : MonoBehaviour
         this.SetSelectionStatus(false);
     }
 
+    public Stats GetCurrentStats()
+    {
+        // TODO: Aplicar powerups y demás historia
+        return this.stats;
+    }
+
+    public void ModifyHealth(int amount)
+    {
+        int newHP = this.stats.hp + amount;
+
+        this.stats.hp = Mathf.Clamp(newHP, 0, this.stats.maxhp);
+    }
+
     public void Recharge()
     {
         this.UpdateEnergy(this.stats.maxEnergy);
@@ -39,6 +53,16 @@ public class UnitCreature : MonoBehaviour
     {
         this.stats.energy = e;
         UnitCreatureUI.current.DisplayEnergy(e);
+    }
+
+    public bool CanExecuteItemSkill(ItemSkill itemSkill)
+    {
+        return this.stats.energy >= itemSkill.cost;
+    }
+
+    public void ConsumeEnergyFor(ItemSkill itemSkill)
+    {
+        this.UpdateEnergy(this.stats.energy - itemSkill.cost);
     }
 
     public void SetSelectionStatus(bool isSelected)

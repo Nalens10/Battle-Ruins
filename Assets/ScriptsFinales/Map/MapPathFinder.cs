@@ -7,6 +7,7 @@ public class MapPathFinder
 {
     private int[,] distanceMap;
     private List<Vector2Int> path;
+    private List<Vector2Int> area;
 
     private int mapWidth;
     private int mapHeight;
@@ -99,7 +100,6 @@ public class MapPathFinder
     {
         if (this.distanceMap[endX, endY] != 0 || this.distanceMap[startX, startY] != 0)
         {
-            // Sin solución
             return;
         }
 
@@ -135,7 +135,6 @@ public class MapPathFinder
 
             if (d == -1)
             {
-                // Invalid
                 return;
             }
 
@@ -174,5 +173,39 @@ public class MapPathFinder
                 continue;
             }
         }
+    }
+
+    public List<Vector2Int> GetReachableArea(Vector2Int center, float radius)
+    {
+        int range = Mathf.RoundToInt(radius);
+
+        this.area.Clear();
+
+        List<Vector2Int> mountainTiles = new List<Vector2Int>();
+        this.OverlowMountain(center, range, mountainTiles);
+
+        foreach (var point in mountainTiles)
+        {
+            if (Vector2Int.Distance(center, point) <= radius)
+            {
+                this.area.Add(point);
+            }
+        }
+
+        return this.area;
+    }
+
+    private void OverlowMountain(Vector2Int point, int range, List<Vector2Int> result)
+    {
+        if (this.distanceMap[point.x, point.y] == -1) return;
+
+        result.Add(point);
+
+        if (range <= 0) return;
+
+        this.OverlowMountain(point + Vector2Int.up, range - 1, result);
+        this.OverlowMountain(point + Vector2Int.down, range - 1, result);
+        this.OverlowMountain(point + Vector2Int.left, range - 1, result);
+        this.OverlowMountain(point + Vector2Int.right, range - 1, result);
     }
 }

@@ -13,6 +13,7 @@ public class MapManager : MonoBehaviour
     private MapDisplay display;
 
     private List<Vector3> worldPathBuffer;
+    private List<Vector3> areaBuffer;
 
     public List<Vector3> playerSpawnPoints;
     public List<Vector3> iaSpawnPoints;
@@ -110,6 +111,20 @@ public class MapManager : MonoBehaviour
         }
 
         return this.worldPathBuffer;
+    }
+
+    public List<Vector3> PredictAreaFor(Vector3 worldCenter, float radius)
+    {
+        Vector2Int localCenter = this.WorldToLocal(worldCenter);
+        List<Vector2Int> localArea = this.pathFinder.GetReachableArea(localCenter, radius);
+
+        this.areaBuffer.Clear();
+        foreach (var localPoint in localArea)
+        {
+            this.areaBuffer.Add(this.LocalToWorld(localPoint));
+        }
+
+        return this.areaBuffer;
     }
 
     public Vector2Int WorldToLocal(Vector3 world)
