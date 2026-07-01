@@ -51,8 +51,8 @@ MonoBehaviour:
   movementSpeed: 8
   master: {fileID: 0}
   stats:
-    hp: 100
-    maxhp: 100
+    hp: 40
+    maxhp: 40
     energy: 2
     maxEnergy: 2
     attack: 2

@@ -15,6 +15,7 @@ public class MapPathFinder
     public MapPathFinder()
     {
         this.path = new List<Vector2Int>();
+        this.area = new List<Vector2Int>();
     }
 
     public void ConfigureForMap(Map map)
@@ -100,6 +101,7 @@ public class MapPathFinder
     {
         if (this.distanceMap[endX, endY] != 0 || this.distanceMap[startX, startY] != 0)
         {
+            // Sin solución
             return;
         }
 
@@ -135,6 +137,7 @@ public class MapPathFinder
 
             if (d == -1)
             {
+                // Invalid
                 return;
             }
 

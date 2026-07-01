@@ -239,7 +239,7 @@ MonoBehaviour:
   range: 2
   cost: 1
   skillName: Cruz Bendita
-  vfx: {fileID: 0}
+  vfx: {fileID: 2915816289817397493, guid: eaa658d6a4236174295999b0431de8f8, type: 3}
 --- !u!114 &1993688298591603881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 35
+  power: 40
 --- !u!1 &8651478278439120990
 GameObject:
   m_ObjectHideFlags: 0
