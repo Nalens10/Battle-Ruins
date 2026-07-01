@@ -24,8 +24,9 @@ public class MapManager : MonoBehaviour
         this.iaSpawnPoints = new List<Vector3>();
 
         this.worldPathBuffer = new List<Vector3>();
+        this.areaBuffer = new List<Vector3>(); 
 
-        this.display = GameObject.FindObjectOfType<MapDisplay>();
+        this.display = FindObjectOfType<MapDisplay>();
 
         this.map = this.CreateMapWithStringData(this.mapData.text);
         this.display.RenderMapData(this.map);

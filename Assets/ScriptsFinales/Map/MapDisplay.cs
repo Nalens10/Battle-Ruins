@@ -93,7 +93,7 @@ public class MapDisplay : MonoBehaviour
 
                         this.DisplayPredictedPath(path);
                         break;
-                    case PlayerCombatStatus.ITEMSKILL:
+                    case PlayerCombatStatus.ITEMSKILL: 
                         List<Vector3> area = GameManager.current.mapManager.PredictAreaFor(
                             this.playerMaster.selectedUnitCreature.transform.position,
                             this.playerMaster.selectedItemSkill.range
