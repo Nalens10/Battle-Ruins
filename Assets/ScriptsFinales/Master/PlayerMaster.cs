@@ -10,7 +10,7 @@ public enum PlayerCombatStatus
     MOVE, ITEMSKILL
 }
 
-public class PlayerMaster : Master
+public class PlayerMaster : Master, IMessageListener
 {
     public PlayerCombatStatus status { get; protected set; }
 
@@ -22,10 +22,16 @@ public class PlayerMaster : Master
 
     public ItemSkill selectedItemSkill { get; protected set; }
 
+    void Start()
+    {
+        MessageManager.current.AddListener(MessageTag.ACTION_UNITCREATURE_MOVE, this);
+        MessageManager.current.AddListener(MessageTag.ACTION_UNITCREATURE_ITEMSKILL, this);
+    }
+
     public override void BeginTurn()
     {
         this.GoToMoveMode();
-        this.RechargeAllUnitCreatures();
+        this.BeginTurnToAllUnitCreatures();
     }
 
     public void OnSelectionRequested(Vector3 worldPos)
@@ -44,6 +50,8 @@ public class PlayerMaster : Master
         {
             this.selectedUnitCreature.SetSelectionStatus(true);
         }
+
+        MessageManager.current.Send(new UnitCreatureSelectedMessage(this.selectedUnitCreature));
     }
 
     public void OnMoveOrItemSkillRequested(Vector3 worldPos)
@@ -91,15 +99,29 @@ public class PlayerMaster : Master
         }
     }
 
+    public void Receive(Message msg)
+    {
+        if (msg is UnitCreatureActionMoveMessage)
+        {
+            this.GoToMoveMode();
+        }
+        if (msg is UnitCreatureActionItemSkillMessage)
+        {
+            UnitCreatureActionItemSkillMessage casm = msg as UnitCreatureActionItemSkillMessage;
+            this.GoToItemSkillMode(casm.itemSkill);
+        }
+    }
+
+
     public void GoToMoveMode()
     {
         this.selectedItemSkill = null;
         this.status = PlayerCombatStatus.MOVE;
     }
 
-    public void GoToSkillMode()
+    public void GoToItemSkillMode(ItemSkill skill)
     {
-        this.selectedItemSkill = this.selectedUnitCreature.GetComponentInChildren<ItemSkill>();
+        this.selectedItemSkill = skill;
 
         this.status = PlayerCombatStatus.ITEMSKILL;
     }

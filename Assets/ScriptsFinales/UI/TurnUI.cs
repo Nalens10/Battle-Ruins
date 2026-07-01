@@ -6,19 +6,29 @@ using UnityEngine.UI;
 
 
  // Les dejo en verde lo que hace ;)
-public class TurnUI : MonoBehaviour
+public class TurnUI : MonoBehaviour, IMessageListener
 {
-    public static TurnUI current;
-    
     public TextMeshProUGUI currentTurnLabel;
-    void Awake()
+
+    public GameObject nextTurnButton;
+
+    void Start()
     {
-        current = this;
+        MessageManager.current.AddListener(MessageTag.NEXT_TURN, this);
     }
 
-    public void SetCurrentTurnLabel(string name)
+    public void Receive(Message msg)
     {
-        // Actualiza el texto del label para mostrar el nombre del jugador actual
-        this.currentTurnLabel.text = name;
+        NextTurnMessage ntm = msg as NextTurnMessage;
+        this.currentTurnLabel.text = ntm.currentTurnMaster.masterName;
+
+        if (ntm.currentTurnMaster is PlayerMaster)
+        {
+            this.nextTurnButton.SetActive(true);
+        }
+        else
+        {
+            this.nextTurnButton.SetActive(false);
+        }
     }
 }

@@ -14,13 +14,16 @@ public class GameManager : MonoBehaviour
 
     public MapManager mapManager { get; protected set; }
 
-    protected List<UnitCreature> gameUnitCreatures;
+    public static GameManager Instance;
 
-    void Start()
+    protected List<UnitCreature> gameCreatures;
+
+    private void Start()
     {
+
         current = this;
 
-        this.gameUnitCreatures = new List<UnitCreature>();
+        this.gameCreatures = new List<UnitCreature>();
 
         this.mapManager = GetComponent<MapManager>();
         this.mapManager.Configure();
@@ -34,18 +37,19 @@ public class GameManager : MonoBehaviour
         ia.SpawnUnitCreatures(this.mapManager.iaSpawnPoints);
 
         this.turnIndex = -1;
-        this.NextTurn();
+
+        Invoke("NextTurn", .5f);
     }
 
     public void EmplaceUnitCreature(UnitCreature unitCreature, Vector3 worldPosition)
     {
         if (this.mapManager.IsAGroundTile(worldPosition) == false)
         {
-            throw new System.Exception("Invalid Creature emplacement!");
+            throw new System.Exception("Invalid UnitCreature emplacement!");
         }
 
         unitCreature.transform.position = this.mapManager.SnapToTile(worldPosition);
-        this.gameUnitCreatures.Add(unitCreature);
+        this.gameCreatures.Add(unitCreature);
     }
 
     public void NextTurn()
@@ -53,20 +57,20 @@ public class GameManager : MonoBehaviour
         this.turnIndex = (this.turnIndex + 1) % this.masters.Length;
 
         Master currentMaster = this.masters[this.turnIndex];
-        TurnUI.current.SetCurrentTurnLabel(currentMaster.masterName);
-
         currentMaster.BeginTurn();
+
+        MessageManager.current.Send(new NextTurnMessage(currentMaster));
     }
 
     public UnitCreature GetUnitCreatureAtPosition(Vector3 worldPosition)
     {
-        foreach (var creature in this.gameUnitCreatures)
+        foreach (var unitCreature in this.gameCreatures)
         {
-            float distance = Vector2.Distance(worldPosition, creature.transform.position);
+            float distance = Vector2.Distance(worldPosition, unitCreature.transform.position);
 
             if (distance < 1f)
             {
-                return creature;
+                return unitCreature;
             }
         }
 
@@ -95,7 +99,7 @@ public class GameManager : MonoBehaviour
 
         if (emitter.CanExecuteItemSkill(itemSkill) == false)
         {
-            Debug.LogError("Can't execute ItemSkill. No energy.");
+            Debug.LogError("Can't execute skill. No energy.");
             return;
         }
 

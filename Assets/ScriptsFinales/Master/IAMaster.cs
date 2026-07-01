@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Les dejo en verde lo que hace ;)
@@ -7,7 +8,7 @@ public class IAMaster : Master
 {
     public override void BeginTurn()
     {
-        this.RechargeAllUnitCreatures();
+        this.BeginTurnToAllUnitCreatures();
         StartCoroutine(this.TurnRutine());
     }
 

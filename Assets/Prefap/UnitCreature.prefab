@@ -51,12 +51,15 @@ MonoBehaviour:
   movementSpeed: 8
   master: {fileID: 0}
   stats:
-    hp: 40
-    maxhp: 40
+    elementalType: 4
+    hp: 100
+    maxhp: 100
     energy: 2
     maxEnergy: 2
     attack: 2
     defense: 2
+    elemAttack: 2
+    elemDefense: 2
     speed: 4
 --- !u!1 &2835328817911158022
 GameObject:

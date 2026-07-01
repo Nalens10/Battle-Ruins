@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -19,17 +20,23 @@ public class UnitCreature : MonoBehaviour
 
     public Stats stats;
 
-    void Start()
-    {
-        this.Recharge();
+    private List<StatusCondition> conditions = new List<StatusCondition>();
 
+    public void Start ()
+    {
         this.SetSelectionStatus(false);
     }
 
     public Stats GetCurrentStats()
     {
-        // TODO: Aplicar powerups y demás historia
-        return this.stats;
+        Stats modedStats = this.stats.Clone();
+
+        foreach (var cond in this.conditions)
+        {
+            cond.ApplyStatsModifiers(modedStats);
+        }
+
+        return modedStats;
     }
 
     public void ModifyHealth(int amount)
@@ -39,9 +46,33 @@ public class UnitCreature : MonoBehaviour
         this.stats.hp = Mathf.Clamp(newHP, 0, this.stats.maxhp);
     }
 
-    public void Recharge()
+    public void BeginTurn()
     {
         this.UpdateEnergy(this.stats.maxEnergy);
+
+        for (int i = 0; i < this.conditions.Count; i++)
+        {
+            StatusCondition cond = this.conditions[i];
+            cond.ConsumeOneTurn();
+
+            if (cond.isDepleted)
+            {
+                this.conditions.RemoveAt(i);
+            }
+        }
+
+        foreach (var cond in this.conditions)
+        {
+            cond.ApplyOnTurnStart(this.stats);
+        }
+    }
+
+    public void AddStatusCondition(StatusCondition condition)
+    {
+        this.conditions.Add(condition);
+
+        condition.transform.position = this.transform.position;
+        condition.transform.SetParent(this.transform);
     }
 
     public int CurrentMaxDistance()
@@ -52,34 +83,23 @@ public class UnitCreature : MonoBehaviour
     private void UpdateEnergy(int e)
     {
         this.stats.energy = e;
-        UnitCreatureUI.current.DisplayEnergy(e);
+        MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
     }
 
-    public bool CanExecuteItemSkill(ItemSkill itemSkill)
+    public bool CanExecuteItemSkill(ItemSkill skill)
     {
-        return this.stats.energy >= itemSkill.cost;
+        return this.stats.energy >= skill.cost;
     }
 
-    public void ConsumeEnergyFor(ItemSkill itemSkill)
+    public void ConsumeEnergyFor(ItemSkill skill)
     {
-        this.UpdateEnergy(this.stats.energy - itemSkill.cost);
+        this.UpdateEnergy(this.stats.energy - skill.cost);
     }
 
     public void SetSelectionStatus(bool isSelected)
     {
         this.selectionIndicator.SetActive(isSelected);
-
         this.isSelected = isSelected;
-
-        if (this.isSelected)
-        {
-            UnitCreatureUI.current.Show();
-            UnitCreatureUI.current.DisplayStats(this.stats);
-        }
-        else
-        {
-            UnitCreatureUI.current.Hide();
-        }
     }
 
     public void FollowPath(Vector3[] worldPath)
@@ -120,5 +140,10 @@ public class UnitCreature : MonoBehaviour
         int cost = Mathf.CeilToInt(length / (float)this.stats.speed);
 
         return cost;
+    }
+
+    public ItemSkill[] GetItemSkills()
+    {
+        return this.GetComponentsInChildren<ItemSkill>();
     }
 }

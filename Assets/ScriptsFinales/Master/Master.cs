@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Master : MonoBehaviour
 {
-    public GameObject unitCreaturePrfb;
+    public GameObject[] unitCreatureTeamPrfbs;
 
     public string masterName = "";
 
@@ -12,17 +12,24 @@ public abstract class Master : MonoBehaviour
 
     public void SpawnUnitCreatures(List<Vector3> spawnPoints)
     {
-        foreach (var point in spawnPoints)
+        for (int i = 0; i < this.unitCreatureTeamPrfbs.Length; i++)
         {
-            this.CreateUnitCreature(this.unitCreaturePrfb, point);
+            if (i >= spawnPoints.Count)
+            {
+                Debug.Log("No more spawn points!");
+                break;
+            }
+
+            GameObject prfb = this.unitCreatureTeamPrfbs[i];
+            this.CreateUnitCreature(prfb, spawnPoints[i]);
         }
     }
 
-    protected void RechargeAllUnitCreatures()
+    protected void BeginTurnToAllUnitCreatures()
     {
         foreach (var unitCreature in this.creatures)
         {
-            unitCreature.Recharge();
+            unitCreature.BeginTurn();
         }
     }
 

@@ -152,12 +152,17 @@ MonoBehaviour:
   movementSpeed: 6
   master: {fileID: 0}
   stats:
+    elementalType: 0
     hp: 100
     maxhp: 100
     energy: 2
     maxEnergy: 2
-    attack: 5
+    attack: 4
     defense: 4
+    elemAttack: 8
+    elemDefense: 8
+    accuracy: 7
+    evasion: 7
     speed: 6
 --- !u!1 &544151547522071849
 GameObject:
@@ -189,6 +194,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3201080140134681988}
+  - {fileID: 66400028141331885}
+  - {fileID: 8949108129322491098}
   m_Father: {fileID: 8410373903688510315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3302535856114462582
@@ -236,9 +243,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  range: 1
   cost: 1
-  skillName: Cruz Bendita
+  distancePenalizationMultiplier: 0.1
+  itemSkillName: Cruz Bendita
   vfx: {fileID: 2915816289817397493, guid: eaa658d6a4236174295999b0431de8f8, type: 3}
 --- !u!114 &1993688298591603881
 MonoBehaviour:
@@ -252,7 +260,139 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 40
+  damageType: 0
+  elementalType: 0
+  power: 5
+--- !u!1 &5179186581861169637
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8949108129322491098}
+  - component: {fileID: 2784161504956187587}
+  - component: {fileID: 5514992953879298200}
+  m_Layer: 0
+  m_Name: CruzHelada
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8949108129322491098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179186581861169637}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5441737786094840555}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2784161504956187587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179186581861169637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 7
+  cost: 1
+  distancePenalizationMultiplier: 0.1
+  itemSkillName: Cruz Helada
+  vfx: {fileID: 5730500251543410589, guid: 08beb8ff62f4df048ae8e9e09033bb50, type: 3}
+--- !u!114 &5514992953879298200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5179186581861169637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 1
+  elementalType: 4
+  power: 20
+--- !u!1 &7166902602496164128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 66400028141331885}
+  - component: {fileID: 456619936323731138}
+  - component: {fileID: 8243871176577422085}
+  m_Layer: 0
+  m_Name: CruzFlamigera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &66400028141331885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166902602496164128}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5441737786094840555}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &456619936323731138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166902602496164128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 4
+  cost: 1
+  distancePenalizationMultiplier: 0.1
+  itemSkillName: Cruz Flamigera
+  vfx: {fileID: 172378031835797992, guid: c713b439409f6554e934ef211e15c3e6, type: 3}
+--- !u!114 &8243871176577422085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7166902602496164128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  elementalType: 1
+  power: 20
 --- !u!1 &8651478278439120990
 GameObject:
   m_ObjectHideFlags: 0

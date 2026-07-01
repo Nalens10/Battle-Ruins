@@ -8,11 +8,15 @@ public class ItemSkill : MonoBehaviour
     public float range = 1.5f;
     public int cost = 1;
 
-    public string skillName;
+    public float distancePenalizationMultiplier = 0.1f;
+
+    public string itemSkillName;
 
     public GameObject vfx;
 
     protected IEffect[] effects;
+
+    public float currentDistancePenalization { get; protected set; }
 
     void Awake()
     {
@@ -21,15 +25,26 @@ public class ItemSkill : MonoBehaviour
 
     public void Resolve(UnitCreature emitter, UnitCreature receiver)
     {
+        float tileDistance = Vector3.Distance(emitter.transform.position, receiver.transform.position);
+        this.currentDistancePenalization = (-tileDistance + 2) * this.distancePenalizationMultiplier;
+
         if (this.effects.Length == 0)
         {
-            Debug.LogError($"This skill ({this.skillName}) has no effects, XD");
+            Debug.LogError($"This skill ({this.itemSkillName}) has no effects!");
             return;
         }
 
-        foreach (var effect in this.effects)
+        bool canHit = this.CalculateIfCanHit(emitter.GetCurrentStats(), receiver.GetCurrentStats());
+        if (canHit)
         {
-            effect.Resolve(emitter, receiver);
+            foreach (var effect in this.effects)
+            {
+                effect.Resolve(emitter, receiver);
+            }
+        }
+        else
+        {
+            MessageManager.current.Send(new ItemSkillMissMessage(this, receiver));
         }
 
         if (this.vfx != null)
@@ -37,5 +52,15 @@ public class ItemSkill : MonoBehaviour
             GameObject go = Instantiate(this.vfx, receiver.transform.position, Quaternion.identity);
             Destroy(go, 2f);
         }
+    }
+
+    private bool CalculateIfCanHit(Stats eStats, Stats rStats)
+    {
+        float hitChance = 1f - Mathf.Max(rStats.evasion - eStats.accuracy, 0) / (float)rStats.evasion;
+        hitChance += this.currentDistancePenalization;
+
+        float dice = Random.Range(0f, 1f);
+
+        return dice < hitChance;
     }
 }
