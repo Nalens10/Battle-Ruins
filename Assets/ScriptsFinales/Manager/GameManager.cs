@@ -1,7 +1,5 @@
-using System.Collections;
+
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 
 // Les dejo en verde lo que hace ;)
