@@ -12,7 +12,9 @@ public enum MessageTag
     UNITCREATURE_UPDATED,
 
     ACTION_UNITCREATURE_MOVE,
-    ACTION_UNITCREATURE_ITEMSKILL
+    ACTION_UNITCREATURE_ITEMSKILL,
+
+    GAME_OVER
 }
 
 public abstract class Message

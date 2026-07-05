@@ -97,13 +97,6 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
                 {
                     ItemSkill[] skills = this.selectedCreature.GetItemSkills();
 
-                    this.AddItemSkillButtton("Move", () =>
-                    {
-                        MessageManager.current.Send(
-                            new UnitCreatureActionMoveMessage(this.selectedCreature)
-                        );
-                    });
-
                     foreach (var skill in skills)
                     {
                         this.AddItemSkillButtton(skill.name, () =>

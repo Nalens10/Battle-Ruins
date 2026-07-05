@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class ItemSkill : MonoBehaviour
 {
-    public float range = 1.5f;
+    public float range = 1f;
+
+    public float area = 0;
+
     public int cost = 1;
 
     public float distancePenalizationMultiplier = 0.1f;

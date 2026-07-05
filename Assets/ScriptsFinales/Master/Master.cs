@@ -8,7 +8,7 @@ public abstract class Master : MonoBehaviour
 
     public string masterName = "";
 
-    protected List<UnitCreature> creatures = new List<UnitCreature>();
+    protected List<UnitCreature> unitCreatures = new List<UnitCreature>();
 
     public void SpawnUnitCreatures(List<Vector3> spawnPoints)
     {
@@ -27,7 +27,7 @@ public abstract class Master : MonoBehaviour
 
     protected void BeginTurnToAllUnitCreatures()
     {
-        foreach (var unitCreature in this.creatures)
+        foreach (var unitCreature in this.unitCreatures)
         {
             unitCreature.BeginTurn();
         }
@@ -41,8 +41,21 @@ public abstract class Master : MonoBehaviour
 
         GameManager.current.EmplaceUnitCreature(unitCreature, worldPosition);
 
-        this.creatures.Add(unitCreature);
+        this.unitCreatures.Add(unitCreature);
     }
+
+    public void OnUnitCreatureDeath(UnitCreature unitCreature)
+    {
+        this.unitCreatures.Remove(unitCreature);
+
+        GameManager.current.OnUnitCreatureDeath(unitCreature);
+    }
+
+    public bool HasAliveUnitCreatures()
+    {
+        return this.unitCreatures.Count != 0;
+    }
+
 
     public abstract void BeginTurn();
 }

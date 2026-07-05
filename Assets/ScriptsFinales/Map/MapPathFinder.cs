@@ -41,6 +41,16 @@ public class MapPathFinder
         }
     }
 
+    public void PutObstacle(Vector2Int pos)
+    {
+        this.distanceMap[pos.x, pos.y] = -1;
+    }
+
+    public void RemoveObstacle(Vector2Int pos)
+    {
+        this.distanceMap[pos.x, pos.y] = 0;
+    }
+
     private void ClearPathData()
     {
         // Clear map
@@ -130,8 +140,10 @@ public class MapPathFinder
         bool first = true;
 
         bool working = true;
+        
         while (working)
         {
+           
             var (x, y) = ((int)currentLocalTile.x, (int)currentLocalTile.y);
             var d = this.distanceMap[x, y];
 
@@ -185,7 +197,7 @@ public class MapPathFinder
         this.area.Clear();
 
         List<Vector2Int> mountainTiles = new List<Vector2Int>();
-        this.OverlowMountain(center, range, mountainTiles);
+        this.OverflowMountain(center, range, mountainTiles);
 
         foreach (var point in mountainTiles)
         {
@@ -198,7 +210,7 @@ public class MapPathFinder
         return this.area;
     }
 
-    private void OverlowMountain(Vector2Int point, int range, List<Vector2Int> result)
+    private void OverflowMountain(Vector2Int point, int range, List<Vector2Int> result)
     {
         if (this.distanceMap[point.x, point.y] == -1) return;
 
@@ -206,9 +218,9 @@ public class MapPathFinder
 
         if (range <= 0) return;
 
-        this.OverlowMountain(point + Vector2Int.up, range - 1, result);
-        this.OverlowMountain(point + Vector2Int.down, range - 1, result);
-        this.OverlowMountain(point + Vector2Int.left, range - 1, result);
-        this.OverlowMountain(point + Vector2Int.right, range - 1, result);
+        this.OverflowMountain(point + Vector2Int.up, range - 1, result);
+        this.OverflowMountain(point + Vector2Int.down, range - 1, result);
+        this.OverflowMountain(point + Vector2Int.left, range - 1, result);
+        this.OverflowMountain(point + Vector2Int.right, range - 1, result);
     }
 }

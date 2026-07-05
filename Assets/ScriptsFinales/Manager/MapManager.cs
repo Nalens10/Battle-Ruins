@@ -18,15 +18,19 @@ public class MapManager : MonoBehaviour
     public List<Vector3> playerSpawnPoints;
     public List<Vector3> iaSpawnPoints;
 
+    public List<Vector3> dynamicObstacles;
+
     public void Configure()
     {
         this.playerSpawnPoints = new List<Vector3>();
         this.iaSpawnPoints = new List<Vector3>();
 
         this.worldPathBuffer = new List<Vector3>();
-        this.areaBuffer = new List<Vector3>(); 
+        this.areaBuffer = new List<Vector3>();
 
-        this.display = FindObjectOfType<MapDisplay>();
+        this.dynamicObstacles = new List<Vector3>();
+
+        this.display = GameObject.FindObjectOfType<MapDisplay>();
 
         this.map = this.CreateMapWithStringData(this.mapData.text);
         this.display.RenderMapData(this.map);
@@ -51,7 +55,7 @@ public class MapManager : MonoBehaviour
                 break;
 
             line = line.Trim();
-
+            // Línea vacía. Ignorar.
             if (line.Length == 0)
                 continue;
 
@@ -100,6 +104,12 @@ public class MapManager : MonoBehaviour
 
     public List<Vector3> PredictWorldPathFor(Vector3 worldStart, Vector3 worldTarget)
     {
+        foreach (var obstacle in this.dynamicObstacles)
+        {
+            Vector2Int local = this.WorldToLocal(obstacle);
+            this.pathFinder.PutObstacle(local);
+        }
+
         Vector2Int localStart = this.WorldToLocal(worldStart);
         Vector2Int localTarget = this.WorldToLocal(worldTarget);
 
@@ -109,6 +119,12 @@ public class MapManager : MonoBehaviour
         foreach (var point in path)
         {
             this.worldPathBuffer.Add(this.LocalToWorld(point));
+        }
+
+        foreach (var obstacle in this.dynamicObstacles)
+        {
+            Vector2Int local = this.WorldToLocal(obstacle);
+            this.pathFinder.RemoveObstacle(local);
         }
 
         return this.worldPathBuffer;
@@ -126,6 +142,21 @@ public class MapManager : MonoBehaviour
         }
 
         return this.areaBuffer;
+    }
+
+    public bool IsInsideArea(List<Vector3> area, Vector3 world)
+    {
+        Vector3 worldTile = this.SnapToTile(world);
+
+        foreach (var point in area)
+        {
+            if (worldTile == point)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public Vector2Int WorldToLocal(Vector3 world)

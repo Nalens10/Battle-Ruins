@@ -17,4 +17,4 @@ public class NextTurnMessage : Message
     {
         return $"{this.currentTurnMaster.masterName} has the turn!";
     }
-}
+}  

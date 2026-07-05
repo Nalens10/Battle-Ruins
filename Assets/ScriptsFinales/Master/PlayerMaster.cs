@@ -55,44 +55,13 @@ public class PlayerMaster : Master, IMessageListener
 
     public void OnMoveOrItemSkillRequested(Vector3 worldPos)
     {
-        Vector3 targetPos = GameManager.current.mapManager.SnapToTile(worldPos);
-
         switch (this.status)
         {
             case PlayerCombatStatus.MOVE:
-                GameManager.current.MoveUnitCreatureTo(this.selectedUnitCreature, targetPos);
+                GameManager.current.MoveUnitCreatureTo(this.selectedUnitCreature, worldPos);
                 break;
             case PlayerCombatStatus.ITEMSKILL:
-                List<Vector3> area = GameManager.current.mapManager.PredictAreaFor(
-                    this.selectedUnitCreature.transform.position,
-                    this.selectedItemSkill.range
-                );
-
-                bool isInArea = false;
-                foreach (var point in area)
-                {
-                    if (point == targetPos)
-                    {
-                        isInArea = true;
-                        break;
-                    }
-                }
-
-                if (isInArea == false)
-                {
-                    Debug.LogError("Can't attack. Target is not in range.");
-                    return;
-                }
-
-                UnitCreature posibleTarget = GameManager.current.GetUnitCreatureAtPosition(targetPos);
-
-                if (posibleTarget == null)
-                {
-                    Debug.LogError("Can't attack. There is no target.");
-                    return;
-                }
-
-                GameManager.current.TryToPerformItemSkill(this.selectedUnitCreature, posibleTarget, this.selectedItemSkill);
+                GameManager.current.TryToPerformItemSkillAtPoint(this.selectedUnitCreature, this.selectedItemSkill, worldPos);
                 this.GoToMoveMode();
                 break;
         }
@@ -104,13 +73,13 @@ public class PlayerMaster : Master, IMessageListener
         {
             this.GoToMoveMode();
         }
+
         if (msg is UnitCreatureActionItemSkillMessage)
         {
-            UnitCreatureActionItemSkillMessage casm = msg as UnitCreatureActionItemSkillMessage;
-            this.GoToItemSkillMode(casm.itemSkill);
+           UnitCreatureActionItemSkillMessage casm = msg as UnitCreatureActionItemSkillMessage;
+            this.GoToSkillMode(casm.itemSkill);
         }
     }
-
 
     public void GoToMoveMode()
     {
@@ -118,9 +87,9 @@ public class PlayerMaster : Master, IMessageListener
         this.status = PlayerCombatStatus.MOVE;
     }
 
-    public void GoToItemSkillMode(ItemSkill skill)
+    public void GoToSkillMode(ItemSkill itemSkill)
     {
-        this.selectedItemSkill = skill;
+        this.selectedItemSkill = itemSkill;
 
         this.status = PlayerCombatStatus.ITEMSKILL;
     }

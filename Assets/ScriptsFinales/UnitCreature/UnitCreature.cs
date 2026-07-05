@@ -19,8 +19,11 @@ public class UnitCreature : MonoBehaviour
 
     private List<StatusCondition> conditions = new List<StatusCondition>();
 
-    public void Start ()
+    public bool isMoving { get; protected set; }
+
+    void Start()
     {
+        this.isMoving = false;
         this.SetSelectionStatus(false);
     }
 
@@ -41,6 +44,21 @@ public class UnitCreature : MonoBehaviour
         int newHP = this.stats.hp + amount;
 
         this.stats.hp = Mathf.Clamp(newHP, 0, this.stats.maxhp);
+
+        if (this.stats.hp == 0)
+        {
+            this.master.OnUnitCreatureDeath(this);
+        }
+    }
+
+    public int DamageWithClamp(int amount)
+    {
+        int targetHp = Mathf.Clamp(this.stats.hp - amount, 1, this.stats.maxhp);
+        int damageTaken = this.stats.hp - targetHp;
+
+        this.stats.hp = targetHp;
+
+        return damageTaken;
     }
 
     public void BeginTurn()
@@ -83,14 +101,14 @@ public class UnitCreature : MonoBehaviour
         MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
     }
 
-    public bool CanExecuteItemSkill(ItemSkill skill)
+    public bool CanExecuteItemSkill(ItemSkill itemSkill)
     {
-        return this.stats.energy >= skill.cost;
+        return this.stats.energy >= itemSkill.cost;
     }
 
-    public void ConsumeEnergyFor(ItemSkill skill)
+    public void ConsumeEnergyFor(ItemSkill itemSkill)
     {
-        this.UpdateEnergy(this.stats.energy - skill.cost);
+        this.UpdateEnergy(this.stats.energy - itemSkill.cost);
     }
 
     public void SetSelectionStatus(bool isSelected)
@@ -107,6 +125,8 @@ public class UnitCreature : MonoBehaviour
 
     private IEnumerator FollowPathRutine(Vector3[] worldPath)
     {
+        this.isMoving = true;
+
         int pathLength = Mathf.Min(this.CurrentMaxDistance(), worldPath.Length);
         int cost = this.GetEnergyCostForPathLength(pathLength);
 
@@ -130,6 +150,8 @@ public class UnitCreature : MonoBehaviour
 
             this.transform.position = target;
         }
+
+        this.isMoving = false;
     }
 
     public int GetEnergyCostForPathLength(int length)
