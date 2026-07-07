@@ -8,6 +8,9 @@ public enum TileType
 {
     WALL,
     GROUND,
+
+    SAFE_ZONE,
+    BATTLE_CENTER
 }
 
 public class Map

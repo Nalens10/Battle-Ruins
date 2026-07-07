@@ -23,16 +23,9 @@ public class MapDisplay : MonoBehaviour
 
     // Marcadores de ruta.
     public GameObject pathMarkerPrfb;
-    private List<MapPathMarker> pathMarkers = new List<MapPathMarker>();
+    private List<MapActionMarker> pathMarkers = new List<MapActionMarker>();
 
     public Transform pathMarkerHolder;
-
-    private PlayerMaster playerMaster;
-
-    void Awake()
-    {
-        this.playerMaster = FindObjectOfType<PlayerMaster>();
-    }
 
     public void RenderMapData(Map mapdata)
     {
@@ -54,7 +47,7 @@ public class MapDisplay : MonoBehaviour
             this.gameCamera.transform.position.z
         );
 
-        this.gameCamera.GetComponent<CameraMove>().SetZoom(mapdata.width / 4f);
+        this.gameCamera.GetComponent<CameraMove>().SetZoom(mapdata.width / 3f);
     }
 
     private Tile GetTileForType(TileType type)
@@ -71,6 +64,10 @@ public class MapDisplay : MonoBehaviour
 
     void Update()
     {
+        PlayerMaster playerMaster = GameManager.current.CurrentPlayer;
+        if (playerMaster == null)
+            return;
+
         if (InputManager.GetIfMouseHasMoved())
         {
             Vector3 world = this.gameCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -86,38 +83,40 @@ public class MapDisplay : MonoBehaviour
             }
 
             if (
-                this.playerMaster.hasUnitCreatureSelected &&
-                GameManager.current.IsOwnerOnTurn(this.playerMaster.selectedUnitCreature)
+                playerMaster != null && 
+                playerMaster.hasUnitCreatureSelected &&
+                GameManager.current.IsOwnerOnTurn(playerMaster.selectedUnitCreature)
             )
             {
                 this.HideAllPathMarkers();
 
-                switch (this.playerMaster.status)
+                switch (playerMaster.status)
                 {
                     case PlayerCombatStatus.MOVE:
                         List<Vector3> path = GameManager.current.mapManager.PredictWorldPathFor(
-                            this.playerMaster.selectedUnitCreature.transform.position, world
+                            playerMaster.selectedUnitCreature.transform.position, world
                         );
 
                         this.DisplayPredictedPath(path);
                         break;
                     case PlayerCombatStatus.ITEMSKILL:
                         List<Vector3> reachArea = GameManager.current.mapManager.PredictAreaFor(
-                           this.playerMaster.selectedUnitCreature.transform.position,
-                            this.playerMaster.selectedItemSkill.range
+                            playerMaster.selectedUnitCreature.transform.position,
+                            playerMaster.selectedItemSkill.range
                         );
 
                         this.DisplayPredictedArea(reachArea);
 
                         if (GameManager.current.mapManager.IsInsideArea(reachArea, world))
                         {
-                            List<Vector3> skillEffectArea = GameManager.current.mapManager.PredictAreaFor(
+                            List<Vector3> itemSkillEffectArea = GameManager.current.mapManager.PredictAreaFor(
                                 world,
-                                this.playerMaster.selectedItemSkill.area
+                                playerMaster.selectedItemSkill.area
                             );
 
-                            this.DisplayPredictedArea(skillEffectArea, 2);
+                            this.DisplayPredictedArea(itemSkillEffectArea, true);
                         }
+
                         break;
                 }
 
@@ -129,42 +128,57 @@ public class MapDisplay : MonoBehaviour
             this.HideAllPathMarkers();
 
             Vector3 world = this.gameCamera.ScreenToWorldPoint(Input.mousePosition);
-            this.playerMaster.OnSelectionRequested(world);
+            if (playerMaster != null)
+            {
+                playerMaster.OnSelectionRequested(world);
+            }
         }
 
-        if (InputManager.GetRightClickDown() && this.playerMaster.hasUnitCreatureSelected)
+        if (playerMaster != null && InputManager.GetRightClickDown() && playerMaster.hasUnitCreatureSelected)
         {
             this.HideAllPathMarkers();
 
             Vector3 world = this.gameCamera.ScreenToWorldPoint(Input.mousePosition);
-            this.playerMaster.OnMoveOrItemSkillRequested(world);
+            playerMaster.OnMoveOrItemSkillRequested(world);
         }
     }
 
     private void DisplayPredictedPath(List<Vector3> path)
     {
-        UnitCreature selected = this.playerMaster.selectedUnitCreature;
+        PlayerMaster playerMaster = GameManager.current.CurrentPlayer;
+
+        if (playerMaster == null)
+            return;
+
+        UnitCreature selected = playerMaster.selectedUnitCreature;
 
         int mathMaxSteps = Mathf.Min(selected.CurrentMaxDistance(), path.Count);
 
         for (int i = 0; i < mathMaxSteps; i++)
         {
-            MapPathMarker marker = this.GetNextMarker();
+            MapActionMarker marker = this.GetNextMarker();
 
             int cost = selected.GetEnergyCostForPathLength(i + 1);
-            marker.SetColourUsingPathCost(cost);
+            marker.ShowForPathUsingCost(cost);
 
             marker.transform.position = path[i];
         }
     }
 
-    private void DisplayPredictedArea(List<Vector3> area, int pseudoCost = 1)
+    private void DisplayPredictedArea(List<Vector3> area, bool isAction = false)
     {
         for (int i = 0; i < area.Count; i++)
         {
-            MapPathMarker marker = this.GetNextMarker();
+            MapActionMarker marker = this.GetNextMarker();
 
-            marker.SetColourUsingPathCost(1);
+            if (isAction)
+            {
+                marker.ShowForItemSkillAction();
+            }
+            else
+            {
+                marker.ShowForItemSkillReach();
+            }
 
             marker.transform.position = area[i];
         }
@@ -178,7 +192,7 @@ public class MapDisplay : MonoBehaviour
         }
     }
 
-    public MapPathMarker GetNextMarker()
+    public MapActionMarker GetNextMarker()
     {
         foreach (var marker in this.pathMarkers)
         {
@@ -189,7 +203,7 @@ public class MapDisplay : MonoBehaviour
         }
 
         GameObject go = Instantiate(this.pathMarkerPrfb);
-        MapPathMarker newMarker = go.GetComponent<MapPathMarker>();
+        MapActionMarker newMarker = go.GetComponent<MapActionMarker>();
         this.pathMarkers.Add(newMarker);
 
         newMarker.transform.SetParent(this.pathMarkerHolder);

@@ -11,6 +11,13 @@ public enum PlayerCombatStatus
 
 public class PlayerMaster : Master, IMessageListener
 {
+    public PlayerData playerData;
+    public void Initialize(PlayerData data)
+    {
+        playerData = data;
+        masterName = data.playerName;
+    }
+
     public PlayerCombatStatus status { get; protected set; }
 
     public UnitCreature selectedUnitCreature { get; protected set; }
@@ -92,5 +99,13 @@ public class PlayerMaster : Master, IMessageListener
         this.selectedItemSkill = itemSkill;
 
         this.status = PlayerCombatStatus.ITEMSKILL;
+    }
+
+    public override void SpawnUnitCreatures(List<Vector3> spawnPoints)
+    {
+        CreateUnitCreature(
+            playerData.selectedCharacter.unitCreaturePrfbs,
+            spawnPoints[0]
+        );
     }
 }

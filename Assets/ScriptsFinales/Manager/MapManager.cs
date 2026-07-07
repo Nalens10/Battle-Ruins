@@ -20,10 +20,14 @@ public class MapManager : MonoBehaviour
 
     public List<Vector3> dynamicObstacles;
 
+    public List<Vector2Int> safeZoneTiles;
+    public Vector2Int battleCenter;
+
     public void Configure()
     {
         this.playerSpawnPoints = new List<Vector3>();
         this.iaSpawnPoints = new List<Vector3>();
+        this.safeZoneTiles = new List<Vector2Int>();
 
         this.worldPathBuffer = new List<Vector3>();
         this.areaBuffer = new List<Vector3>();
@@ -37,6 +41,7 @@ public class MapManager : MonoBehaviour
 
         this.pathFinder = new MapPathFinder();
         this.pathFinder.ConfigureForMap(this.map);
+
     }
 
     public Map CreateMapWithStringData(string mapData)
@@ -80,6 +85,14 @@ public class MapManager : MonoBehaviour
                     case 'E':
                         flatTilesData.Add(TileType.GROUND);
                         this.iaSpawnPoints.Add(this.LocalToWorld(new Vector2Int(x, mapHeight - 1)));
+                        break;
+                    case 'S':
+                        flatTilesData.Add(TileType.SAFE_ZONE);
+                        safeZoneTiles.Add(new Vector2Int(x, mapHeight - 1));
+                        break;
+                    case 'B':
+                        flatTilesData.Add(TileType.BATTLE_CENTER);
+                        battleCenter = new Vector2Int(x, mapHeight - 1);
                         break;
                     default:
                         throw new System.Exception("Invalid map data character: " + letter);
@@ -186,5 +199,23 @@ public class MapManager : MonoBehaviour
     {
         var local = this.WorldToLocal(worldPoint);
         return this.LocalToWorld(local);
+    }
+
+    public bool AreSameTile(Vector3 a, Vector3 b)
+    {
+        Vector2Int aa = this.WorldToLocal(a);
+        Vector2Int bb = this.WorldToLocal(b);
+
+        return aa == bb;
+    }
+
+    public int Width
+    {
+        get { return map.width; }
+    }
+
+    public int Height
+    {
+        get { return map.height; }
     }
 }

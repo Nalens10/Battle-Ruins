@@ -7,34 +7,43 @@ public class SelectorPlayer : MonoBehaviour
 {
     [SerializeField] private int playerID; //0,1,2,3
 
-    public List<Character> characters;
+    [SerializeField] private string playerName;
 
-    private int indexCharacter;
+    [SerializeField] private Toggle toggle;
 
     [SerializeField] private Image imagen;
 
+    [SerializeField] private List<Character> characters;
+
+    private int indexCharacter;
+
     private void Start()
     {
-        indexCharacter = PlayerPrefs.GetInt("PlayerIndex_" + playerID, 0);
+        PlayerData data = CharacterSelection.Instance.players[playerID];
 
-        if (indexCharacter >= characters.Count)
-        {
-            indexCharacter = 0;
-        }
+        data.playerName = playerName;
+
+        data.isPlaying = toggle.isOn;
+
+        indexCharacter = 0;
+
+        data.selectedCharacter = characters[indexCharacter];
 
         UpdateCharacterImage();
+
+        toggle.onValueChanged.AddListener(OnToggleChanged);
     }
 
     void UpdateCharacterImage()
     {
-        PlayerPrefs.SetInt("PlayerIndex_" + playerID, indexCharacter);
-
         imagen.sprite = characters[indexCharacter].characterSprite;
+
+        CharacterSelection.Instance.players[playerID].selectedCharacter =
+            characters[indexCharacter];
     }
 
     public void NextCharacter()
     {
-        Debug.Log("Siguiente");
         indexCharacter++;
 
         if (indexCharacter >= characters.Count)
@@ -45,12 +54,16 @@ public class SelectorPlayer : MonoBehaviour
 
     public void PreviousCharacter()
     {
-        Debug.Log("Previo");
         indexCharacter--;
 
         if (indexCharacter < 0)
             indexCharacter = characters.Count - 1;
 
         UpdateCharacterImage();
+    }
+
+    public void OnToggleChanged(bool value)
+    {
+        CharacterSelection.Instance.players[playerID].isPlaying = value;
     }
 }

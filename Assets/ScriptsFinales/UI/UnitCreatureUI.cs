@@ -12,38 +12,43 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
 {
     public GameObject[] energyBlocks;
 
-    public Slider healthSlider;
+    public HealthBarUI healthBar;
 
-    public DynamicItemSkillUIList dynStatList;
+    public TextMeshProUGUI elementalTypeLabel;
+
     public DynamicItemSkillUIList dynButtonList;
+    public DynamicItemSkillUIList dynStatList;
 
-    protected UnitCreature selectedCreature;
+    public StatusConditionListUI statusConditionListUI;
+
+    protected UnitCreature selectedUnitCreature;
 
     void Start()
     {
         MessageManager.current.AddListener(MessageTag.UNITCREATURE_SELECTED, this);
         MessageManager.current.AddListener(MessageTag.UNITCREATURE_UPDATED, this);
 
-        this.dynStatList.ConfigureAndHide();
         this.dynButtonList.ConfigureAndHide();
+        this.dynStatList.ConfigureAndHide();
 
         this.Hide();
     }
 
-    public void DisplayStats(Stats stats)
+    public void DisplayStats(Stats baseStats, Stats currentStats)
     {
-        this.DisplayEnergy(stats.energy);
+        this.elementalTypeLabel.text = baseStats.elementalType.ToString();
 
-        this.healthSlider.value = stats.hp / (float)stats.maxhp;
+        this.DisplayEnergy(currentStats.energy);
 
-        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Atk", stats.attack);
-        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("EAtk", stats.elemAttack);
-        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Def", stats.defense);
-        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("EDef", stats.elemDefense);
-        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Spd", stats.speed);
-        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Acc", stats.accuracy);
-        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Eva", stats.evasion);
+        this.healthBar.SetHealth(currentStats.hp, currentStats.maxhp);
 
+        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Atk", baseStats.attack, currentStats.attack);
+        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("EAtk", baseStats.elemAttack, currentStats.elemAttack);
+        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Def", baseStats.defense, currentStats.defense);
+        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("EDef", baseStats.elemDefense, currentStats.elemDefense);
+        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Spd", baseStats.speed, currentStats.speed);
+        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Acc", baseStats.accuracy, currentStats.accuracy);
+        this.dynStatList.GetNextItemAndActivate<SingleStatUI>().Configure("Eva", baseStats.evasion, currentStats.evasion);
     }
 
     public void DisplayEnergy(int energy)
@@ -59,10 +64,10 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
         }
     }
 
-    public void AddItemSkillButtton(string itemSkillName, UnityAction onClick)
+    public void AddItemSkillButtton(string itemSkillName, ItemSkill itemSkill, UnityAction onClick)
     {
         ItemSkillButton btn = this.dynButtonList.GetNextItemAndActivate<ItemSkillButton>();
-        btn.Configure(itemSkillName, onClick);
+        btn.Configure(itemSkillName, onClick, itemSkill);
     }
 
     public void Show()
@@ -74,8 +79,8 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
     {
         this.gameObject.SetActive(false);
 
-        this.dynStatList.HideAll();
         this.dynButtonList.HideAll();
+        this.dynStatList.HideAll();
     }
 
     public void Receive(Message msg)
@@ -87,22 +92,25 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
             this.dynButtonList.HideAll();
             this.dynStatList.HideAll();
 
-            this.selectedCreature = csm.unitCreature;
-            if (this.selectedCreature != null)
+            this.selectedUnitCreature = csm.unitCreature;
+            if (this.selectedUnitCreature != null)
             {
                 this.Show();
-                this.DisplayStats(this.selectedCreature.GetCurrentStats());
+                this.DisplayStats(this.selectedUnitCreature.GetBaseStats(), this.selectedUnitCreature.GetCurrentStats());
+                this.statusConditionListUI.DisplayStatusConditions(this.selectedUnitCreature.GetCurrentStatusConditions());
 
-                if (this.selectedCreature.master is PlayerMaster)
+                if (this.selectedUnitCreature.master is PlayerMaster)
                 {
-                    ItemSkill[] skills = this.selectedCreature.GetItemSkills();
+                    ItemSkill[] itemSkills = this.selectedUnitCreature.GetItemSkills();
 
-                    foreach (var skill in skills)
+                    // Agregar botones para cada item skill
+
+                    foreach (var itemSkill in itemSkills)
                     {
-                        this.AddItemSkillButtton(skill.name, () =>
+                        this.AddItemSkillButtton(itemSkill.name, itemSkill, () =>
                         {
                             MessageManager.current.Send(
-                                new UnitCreatureActionItemSkillMessage(this.selectedCreature, skill)
+                                new UnitCreatureActionItemSkillMessage(this.selectedUnitCreature, itemSkill)
                             );
                         });
                     }
@@ -119,10 +127,11 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
         {
             UnitCreatureUpdatedMessage cm = msg as UnitCreatureUpdatedMessage;
 
-            if (this.selectedCreature == cm.unitCreature)
+            if (this.selectedUnitCreature == cm.unitCreature)
             {
                 this.dynStatList.HideAll();
-                this.DisplayStats(this.selectedCreature.GetCurrentStats());
+                this.DisplayStats(this.selectedUnitCreature.GetBaseStats(), this.selectedUnitCreature.GetCurrentStats());
+                this.statusConditionListUI.DisplayStatusConditions(this.selectedUnitCreature.GetCurrentStatusConditions());
             }
         }
     }

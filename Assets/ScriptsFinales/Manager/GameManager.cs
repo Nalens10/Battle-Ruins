@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 // Les dejo en verde lo que hace ;)
@@ -19,9 +20,19 @@ public class GameManager : MonoBehaviour
 
     protected List<UnitCreature> returnBuffer;
 
-    void Start()
+    public PlayerMaster playerMasterPrefab;
+
+    public Transform playerMasterHolder;
+
+    public BattleRoyaleZoneManager battleRoyale;
+
+    void Awake()
     {
         current = this;
+    }
+
+    void Start()
+    {
 
         this.gameUnitCreatures = new List<UnitCreature>();
         this.graveyard = new List<UnitCreature>();
@@ -31,13 +42,47 @@ public class GameManager : MonoBehaviour
         this.mapManager = GetComponent<MapManager>();
         this.mapManager.Configure();
 
-        Master player = this.GetComponentInChildren<PlayerMaster>();
-        Master ia = this.GetComponentInChildren<IAMaster>();
+        battleRoyale.Initialize(this.mapManager);
 
-        this.masters = new Master[] { player, ia };
+        battleRoyale = FindFirstObjectByType<BattleRoyaleZoneManager>();
 
-        player.SpawnUnitCreatures(this.mapManager.playerSpawnPoints);
-        ia.SpawnUnitCreatures(this.mapManager.iaSpawnPoints);
+        if (battleRoyale == null)
+        {
+            Debug.LogError("No se encontró BattleRoyaleZoneManager en el GameManager.");
+        }
+
+        List<Master> masterList = new List<Master>();
+
+        int spawnIndex = 0;
+
+        foreach (PlayerData player in CharacterSelection.Instance.players)
+        {
+            if (!player.isPlaying)
+                continue;
+
+            PlayerMaster master =
+                Instantiate(playerMasterPrefab, playerMasterHolder);
+
+            master.Initialize(player);
+
+            master.SpawnUnitCreatures(
+                new List<Vector3>()
+                {
+            mapManager.playerSpawnPoints[spawnIndex]
+                });
+
+            masterList.Add(master);
+
+            spawnIndex++;
+        }
+
+        IAMaster ia = GetComponentInChildren<IAMaster>();
+
+        ia.SpawnUnitCreatures(mapManager.iaSpawnPoints);
+
+        masterList.Add(ia);
+
+        masters = masterList.ToArray();
 
         this.turnIndex = -1;
         this.isGameOver = false;
@@ -90,6 +135,12 @@ public class GameManager : MonoBehaviour
         MessageManager.current.Send(new NextTurnMessage(currentMaster));
         Debug.Log(currentMaster.masterName);
         currentMaster.BeginTurn();
+
+        
+        if (currentMaster is IAMaster)
+        {
+            battleRoyale.OnIATurn();
+        }
     }
 
     protected void CheckForGameOver()
@@ -263,6 +314,14 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        if (itemSkill.isSpawner)
+        {
+            emitter.ConsumeEnergyFor(itemSkill);
+            itemSkill.ResolveAsSpawner(emitter, area);
+            return;
+        }
+
+
         if (this.ThereIsTargetInArea(area) == false)
         {
             Debug.Log("There is no target to execute Skill");
@@ -276,7 +335,7 @@ public class GameManager : MonoBehaviour
             UnitCreature receiver = this.GetUnitCreatureAtPosition(point);
             if (receiver != null)
             {
-                itemSkill.Resolve(emitter, receiver);
+                itemSkill.ResolveForReceiver(emitter, receiver);
             }
         }
     }
@@ -287,4 +346,17 @@ public class GameManager : MonoBehaviour
         return unitCreature.master == currentMaster;
     }
 
+    public PlayerMaster CurrentPlayer
+    {
+        get
+        {
+            if (masters == null)
+                return null;
+
+            if (turnIndex < 0 || turnIndex >= masters.Length)
+                return null;
+
+            return masters[turnIndex] as PlayerMaster;
+        }
+    }
 }

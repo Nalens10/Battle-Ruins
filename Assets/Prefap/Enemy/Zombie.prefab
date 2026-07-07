@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7261224a31f04e14a9baf3f5fa05e757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: 0}
   selectionIndicator: {fileID: 2835328817911158022}
   movementSpeed: 50
   master: {fileID: 0}
@@ -167,10 +166,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1493642445
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f75ebd5861ad89948aa096d907a3149b, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.20627403, a: 1}
+  m_Color: {r: 1, g: 0.14930184, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -180,72 +179,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &6165890945905456925
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 9131296561976828991}
-  - component: {fileID: 2867367356392352417}
-  - component: {fileID: 6140119997471064245}
-  m_Layer: 0
-  m_Name: Mordida
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &9131296561976828991
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6165890945905456925}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 510741344822729117}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2867367356392352417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6165890945905456925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 1
-  area: 0
-  cost: 1
-  distancePenalizationMultiplier: 0.1
-  itemSkillName: Mordida
-  vfx: {fileID: 0}
---- !u!114 &6140119997471064245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6165890945905456925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageType: 0
-  elementalType: 5
-  power: 20
 --- !u!1 &6612386319021399569
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +250,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1493642445
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 495c6890d6eac2a4f967d5f745b075e7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -330,3 +263,65 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &5258018903751297702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 510741344822729117}
+    m_Modifications:
+    - target: {fileID: 2119393806341078459, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_Name
+      value: Mordida
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+--- !u!4 &9131296561976828991 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+  m_PrefabInstance: {fileID: 5258018903751297702}
+  m_PrefabAsset: {fileID: 0}

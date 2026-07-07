@@ -5,6 +5,8 @@ using UnityEngine;
 // Les dejo en verde lo que hace ;)
 public class IAMaster : Master
 {
+    public GameObject[] enemyPrefabs;
+
     protected UnitCreature lastTarget;
 
     public override void BeginTurn()
@@ -107,5 +109,20 @@ public class IAMaster : Master
         }
 
         GameManager.current.NextTurn();
+    }
+
+    public override void SpawnUnitCreatures(List<Vector3> spawnPoints)
+    {
+        int amount = Mathf.Min(enemyPrefabs.Length, spawnPoints.Count);
+
+        for (int i = 0; i < amount; i++)
+        {
+            CreateUnitCreature(enemyPrefabs[i], spawnPoints[i]);
+        }
+
+        if (enemyPrefabs.Length > spawnPoints.Count)
+        {
+            Debug.LogWarning("No hay suficientes SpawnPoints para todos los enemigos.");
+        }
     }
 }

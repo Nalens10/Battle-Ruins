@@ -1,70 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1763604473175872483
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1856018907400794385}
-  - component: {fileID: 6515728669822835613}
-  - component: {fileID: 3316446754461102140}
-  m_Layer: 0
-  m_Name: CruzBendita
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1856018907400794385
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763604473175872483}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9090953036448241278}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6515728669822835613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763604473175872483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 1
-  cost: 1
-  distancePenalizationMultiplier: 0.1
-  itemSkillName: Cruz Bendita
-  vfx: {fileID: 2915816289817397493, guid: eaa658d6a4236174295999b0431de8f8, type: 3}
---- !u!114 &3316446754461102140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1763604473175872483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageType: 0
-  elementalType: 0
-  power: 5
 --- !u!1 &3611980096510443964
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +106,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1493642445
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ddeead0fd005fcd43b8cbf7a95bb4ea4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -246,7 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7261224a31f04e14a9baf3f5fa05e757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localPosition: {x: 0, y: 0}
   selectionIndicator: {fileID: 5601734226658348235}
   movementSpeed: 8
   master: {fileID: 0}
@@ -334,7 +268,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1493642445
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: f75ebd5861ad89948aa096d907a3149b, type: 3}
   m_Color: {r: 0, g: 1, b: 0.9114239, a: 1}
@@ -347,133 +281,189 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &6257911937189428661
-GameObject:
+--- !u!1001 &4221859421930561965
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3838901181316454712}
-  - component: {fileID: 3745692347181990487}
-  - component: {fileID: 5171679494867251088}
-  m_Layer: 0
-  m_Name: CruzFlamigera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3838901181316454712
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6257911937189428661}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9090953036448241278}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3745692347181990487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6257911937189428661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 4
-  cost: 1
-  distancePenalizationMultiplier: 0.1
-  itemSkillName: Cruz Flamigera
-  vfx: {fileID: 172378031835797992, guid: c713b439409f6554e934ef211e15c3e6, type: 3}
---- !u!114 &5171679494867251088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6257911937189428661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageType: 2
-  elementalType: 1
-  power: 20
---- !u!1 &8236319492499342704
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5304391934588133455}
-  - component: {fileID: 1373094389722283862}
-  - component: {fileID: 8729193162062658573}
-  m_Layer: 0
-  m_Name: CruzHelada
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5304391934588133455
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9090953036448241278}
+    m_Modifications:
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7804631531067317272, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+      propertyPath: m_Name
+      value: CruzFlamigera
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+--- !u!4 &3838901181316454712 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1139844524936231061, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+  m_PrefabInstance: {fileID: 4221859421930561965}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8236319492499342704}
+--- !u!1001 &4227250270942836068
+PrefabInstance:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 9090953036448241278}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1373094389722283862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9090953036448241278}
+    m_Modifications:
+    - target: {fileID: 2509526807507150471, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_Name
+      value: CruzBendita
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+--- !u!4 &1856018907400794385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+  m_PrefabInstance: {fileID: 4227250270942836068}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8236319492499342704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 7
-  cost: 1
-  distancePenalizationMultiplier: 0.1
-  itemSkillName: Cruz Helada
-  vfx: {fileID: 5730500251543410589, guid: 08beb8ff62f4df048ae8e9e09033bb50, type: 3}
---- !u!114 &8729193162062658573
-MonoBehaviour:
+--- !u!1001 &8404359089417375861
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9090953036448241278}
+    m_Modifications:
+    - target: {fileID: 499619048124896517, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_Name
+      value: CruzHelada
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+--- !u!4 &5304391934588133455 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+  m_PrefabInstance: {fileID: 8404359089417375861}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8236319492499342704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageType: 1
-  elementalType: 4
-  power: 20

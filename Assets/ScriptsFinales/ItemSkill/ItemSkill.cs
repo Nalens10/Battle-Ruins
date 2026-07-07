@@ -19,14 +19,20 @@ public class ItemSkill : MonoBehaviour
 
     protected IEffect[] effects;
 
+    public ElementalType elementalType;
+
     public float currentDistancePenalization { get; protected set; }
+
+    protected SpawnEffect spawnEffect;
+    public bool isSpawner = false;
 
     void Awake()
     {
         this.effects = this.GetComponents<IEffect>();
+        this.spawnEffect = this.GetComponent<SpawnEffect>();
     }
 
-    public void Resolve(UnitCreature emitter, UnitCreature receiver)
+    public void ResolveForReceiver(UnitCreature emitter, UnitCreature receiver)
     {
         float tileDistance = Vector3.Distance(emitter.transform.position, receiver.transform.position);
         this.currentDistancePenalization = (-tileDistance + 2) * this.distancePenalizationMultiplier;
@@ -54,6 +60,20 @@ public class ItemSkill : MonoBehaviour
         {
             GameObject go = Instantiate(this.vfx, receiver.transform.position, Quaternion.identity);
             Destroy(go, 2f);
+        }
+    }
+
+    public void ResolveAsSpawner(UnitCreature emitter, List<Vector3> area)
+    {
+        foreach (var point in area)
+        {
+            this.spawnEffect.ResolveAtPoint(emitter, point);
+
+            if (this.vfx != null)
+            {
+                GameObject go = Instantiate(this.vfx, point, Quaternion.identity);
+                Destroy(go, 2f);
+            }
         }
     }
 

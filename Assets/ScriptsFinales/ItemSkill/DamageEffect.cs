@@ -13,7 +13,6 @@ public enum DamageType
 public class DamageEffect : MonoBehaviour, IEffect
 {
     public DamageType damageType;
-    public ElementalType elementalType;
 
     public int power = 20;
 
@@ -24,7 +23,7 @@ public class DamageEffect : MonoBehaviour, IEffect
         Stats eStats = emitter.GetCurrentStats();
         Stats rStats = receiver.GetCurrentStats();
 
-        int damage = this.CalculateDamage(eStats, rStats);
+        int damage = this.CalculateDamage(eStats, rStats, parentSkill.elementalType);
 
         bool isCritical = this.IsCritical(eStats, rStats, parentSkill.currentDistancePenalization);
         if (isCritical)
@@ -32,18 +31,18 @@ public class DamageEffect : MonoBehaviour, IEffect
             damage *= 2;
         }
 
-        MessageManager.current.Send(new ItemSkillDamageMessage(parentSkill, receiver, damage, isCritical));
+        MessageManager.current.Send(new ItemSkillHealthModMessage(parentSkill, receiver, - damage, isCritical));
         receiver.ModifyHealth(-damage);
     }
 
-    protected int CalculateDamage(Stats emitterStats, Stats receiverStats)
+    protected int CalculateDamage(Stats emitterStats, Stats receiverStats, ElementalType skillElementalType)
     {
         
         float AD = this.CalculateAD(emitterStats, receiverStats);
         float rawDamage = (2f * this.power * AD);
         rawDamage = (rawDamage / 50f) + 2f;
 
-        rawDamage *= this.GetElementalMultiplier(this.elementalType, receiverStats.elementalType);
+        rawDamage *= this.GetElementalMultiplier( skillElementalType, receiverStats.elementalType);
 
         return Mathf.RoundToInt(rawDamage);
     }

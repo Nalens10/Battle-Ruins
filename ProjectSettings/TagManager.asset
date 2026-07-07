@@ -44,9 +44,6 @@ TagManager:
   - name: Map
     uniqueID: 730491783
     locked: 0
-  - name: Markers
-    uniqueID: 2425542825
-    locked: 0
   - name: Creatures
     uniqueID: 1493642445
     locked: 0

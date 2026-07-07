@@ -4,26 +4,13 @@ using UnityEngine;
 
 public abstract class Master : MonoBehaviour
 {
-    public GameObject[] unitCreatureTeamPrfbs;
-
+    
     public string masterName = "";
 
     protected List<UnitCreature> unitCreatures = new List<UnitCreature>();
 
-    public void SpawnUnitCreatures(List<Vector3> spawnPoints)
-    {
-        for (int i = 0; i < this.unitCreatureTeamPrfbs.Length; i++)
-        {
-            if (i >= spawnPoints.Count)
-            {
-                Debug.Log("No more spawn points!");
-                break;
-            }
-
-            GameObject prfb = this.unitCreatureTeamPrfbs[i];
-            this.CreateUnitCreature(prfb, spawnPoints[i]);
-        }
-    }
+    public abstract void SpawnUnitCreatures(List<Vector3> spawnPoints);
+  
 
     protected void BeginTurnToAllUnitCreatures()
     {
@@ -37,11 +24,18 @@ public abstract class Master : MonoBehaviour
     {
         GameObject go = Instantiate(unitCreaturePrfb);
         UnitCreature unitCreature = go.GetComponent<UnitCreature>();
+
+        unitCreature.transform.position = worldPosition;
+
+        this.AdoptUnitCreature(unitCreature);
+    }
+
+    public void AdoptUnitCreature(UnitCreature unitCreature)
+    {
         unitCreature.master = this;
-
-        GameManager.current.EmplaceUnitCreature(unitCreature, worldPosition);
-
         this.unitCreatures.Add(unitCreature);
+
+        GameManager.current.EmplaceUnitCreature(unitCreature, unitCreature.transform.position);
     }
 
     public void OnUnitCreatureDeath(UnitCreature unitCreature)

@@ -5,7 +5,6 @@ using UnityEngine;
 // Les dejo en verde lo que hace ;)
 public class UnitCreature : MonoBehaviour
 {
-    public Vector2Int localPosition;
 
     public GameObject selectionIndicator;
 
@@ -25,6 +24,12 @@ public class UnitCreature : MonoBehaviour
     {
         this.isMoving = false;
         this.SetSelectionStatus(false);
+
+    }
+
+    public Stats GetBaseStats()
+    {
+        return this.stats.Clone();
     }
 
     public Stats GetCurrentStats()
@@ -37,6 +42,11 @@ public class UnitCreature : MonoBehaviour
         }
 
         return modedStats;
+    }
+
+    public StatusCondition[] GetCurrentStatusConditions()
+    {
+        return this.conditions.ToArray();
     }
 
     public void ModifyHealth(int amount)
@@ -61,6 +71,16 @@ public class UnitCreature : MonoBehaviour
         return damageTaken;
     }
 
+    public int Heal(int amount)
+    {
+        int targetHp = Mathf.Clamp(this.stats.hp + amount, 1, this.stats.maxhp);
+        int healed = targetHp - this.stats.hp;
+
+        this.stats.hp = targetHp;
+
+        return healed;
+    }
+
     public void BeginTurn()
     {
         this.UpdateEnergy(this.stats.maxEnergy);
@@ -68,17 +88,13 @@ public class UnitCreature : MonoBehaviour
         for (int i = 0; i < this.conditions.Count; i++)
         {
             StatusCondition cond = this.conditions[i];
+            cond.ApplyOnTurnStart(this.stats); 
             cond.ConsumeOneTurn();
 
             if (cond.isDepleted)
             {
                 this.conditions.RemoveAt(i);
             }
-        }
-
-        foreach (var cond in this.conditions)
-        {
-            cond.ApplyOnTurnStart(this.stats);
         }
     }
 
@@ -149,6 +165,7 @@ public class UnitCreature : MonoBehaviour
             }
 
             this.transform.position = target;
+            MessageManager.current.Send(new UnitCreatureMovedMessage(this));
         }
 
         this.isMoving = false;

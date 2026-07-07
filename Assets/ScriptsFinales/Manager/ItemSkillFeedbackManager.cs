@@ -8,7 +8,7 @@ public class ItemSkillFeedbackManager : MonoBehaviour, IMessageListener
 
     void Start()
     {
-        MessageManager.current.AddListener(MessageTag.ITEMSKILL_DAMAGE, this);
+        MessageManager.current.AddListener(MessageTag.ITEMSKILL_HEALTH_MOD, this);
         MessageManager.current.AddListener(MessageTag.ITEMSKILL_MISS, this);
 
         this.items = new List<ItemSkillFeedbackUI>();
@@ -26,12 +26,12 @@ public class ItemSkillFeedbackManager : MonoBehaviour, IMessageListener
 
     public void Receive(Message msg)
     {
-        if (msg is ItemSkillDamageMessage)
+        if (msg is ItemSkillHealthModMessage)
         {
-            ItemSkillDamageMessage sm = msg as ItemSkillDamageMessage;
+            ItemSkillHealthModMessage sm = msg as ItemSkillHealthModMessage;
             ItemSkillFeedbackUI ui = this.GetNextItemForReceiver(sm.receiver);
 
-            ui.ConfigureForDamage(sm.receiver, sm.damage, sm.critical);
+            ui.ConfigureForHealthMod(sm.receiver, sm.healthModAmount, sm.critical);
         }
 
         if (msg is ItemSkillMissMessage)
