@@ -140,6 +140,9 @@ public class GameManager : MonoBehaviour
         if (currentMaster is IAMaster)
         {
             battleRoyale.OnIATurn();
+            IAMaster ia = GetComponentInChildren<IAMaster>();
+            ia.enemyCount= 3;
+            ia.SpawnUnitCreatures(mapManager.iaSpawnPoints);
         }
     }
 

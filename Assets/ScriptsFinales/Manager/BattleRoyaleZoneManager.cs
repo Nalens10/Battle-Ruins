@@ -4,39 +4,138 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class BattleRoyaleZoneManager : MonoBehaviour
-{ 
-    [Header("References")] public GameObject poisonAreaPrefab; 
-    [Header("Gameplay")] public int shrinkPerIATurn = 1; 
+{
+    [Header("References")] public GameObject poisonAreaPrefab;
+
+    [Header("Gameplay")] public int shrinkPerIATurn = 1;
+
+    
+
     private MapManager mapManager;
-    private int[,] ringMap;
-    private GameObject[,] poisonObjects;
     private Transform poisonHolder;
-    private bool[,] safeTiles;
-    private int currentRing;
+
+    private int[,] tileRing;
+    private GameObject[,] poisonTiles;
+
+    //private int currentRing = -1;
     private int maxRing;
-    private bool initialized = false;
-    public void Initialize(MapManager map)
+    private int currentRing;
+
+    public void Initialize(MapManager manager)
     {
-        mapManager = map;
+        mapManager = manager;
+
+        if (mapManager == null)
+        {
+            Debug.LogError("MapManager es null.");
+            return;
+        }
+
+        if (poisonAreaPrefab == null)
+        {
+            Debug.LogError("No asignaste el Poison Prefab.");
+            return;
+        }
 
         poisonHolder = new GameObject("Poison Areas").transform;
         poisonHolder.SetParent(transform);
 
-        GenerateSafeTileMap();
         GenerateRingMap();
         SpawnPoisonTiles();
         RefreshPoison();
-
-        initialized = true;
     }
-    public void OnIATurn()
+
+    private int GetRingForTile(int x, int y)
     {
-        if (!initialized)
+        int left = x;
+
+        int right = mapManager.Width - 1 - x;
+
+        int top = y;
+
+        int bottom = mapManager.Height - 1 - y;
+
+        return Mathf.Min(left, right, top, bottom);
+    }
+
+    private void GenerateRingMap()
+    {
+        tileRing = new int[mapManager.Width, mapManager.Height];
+
+        maxRing = 0;
+
+        for (int x = 0; x < mapManager.Width; x++)
         {
-            Debug.LogWarning("BattleRoyale todavía no está inicializado.");
-            return;
+            for (int y = 0; y < mapManager.Height; y++)
+            {
+                int ring = GetRingForTile(x, y);
+
+                tileRing[x, y] = ring;
+
+                if (ring > maxRing)
+                    maxRing = ring;
+            }
         }
 
+        Debug.Log("Último anillo: " + maxRing);
+    }
+
+    private void SpawnPoisonTiles()
+    {
+        poisonTiles = new GameObject[mapManager.Width, mapManager.Height];
+
+        for (int x = 0; x < mapManager.Width; x++)
+        {
+            for (int y = 0; y < mapManager.Height; y++)
+            {
+                TileType tile = mapManager.map.GetTileType(x, y);
+
+                if (tile == TileType.WALL)
+                    continue;
+
+                Vector2Int localTile = new Vector2Int(x, y);
+
+                if (mapManager.safeZoneTiles.Contains(localTile))
+                    continue;
+
+                Vector3 worldPosition =
+                    mapManager.LocalToWorld(new Vector2Int(x, y));
+
+                GameObject poison =
+                    Instantiate(
+                        poisonAreaPrefab,
+                        worldPosition,
+                        Quaternion.identity,
+                        poisonHolder
+                    );
+
+                poison.name = $"Poison ({x},{y})";
+
+                poison.SetActive(false);
+
+                poisonTiles[x, y] = poison;
+            }
+        }
+    }
+
+    private void RefreshPoison()
+    {
+        for (int x = 0; x < mapManager.Width; x++)
+        {
+            for (int y = 0; y < mapManager.Height; y++)
+            {
+                GameObject poison = poisonTiles[x, y];
+
+                if (poison == null)
+                    continue;
+
+                poison.SetActive(tileRing[x, y] <= currentRing);
+            }
+        }
+    }
+
+    public void OnIATurn()
+    {
         currentRing += shrinkPerIATurn;
 
         if (currentRing > maxRing)
@@ -44,166 +143,5 @@ public class BattleRoyaleZoneManager : MonoBehaviour
 
         RefreshPoison();
     }
-    private void GenerateSafeTileMap()
-    {
-        safeTiles = new bool[mapManager.Width, mapManager.Height]; 
-        foreach (Vector2Int tile in mapManager.safeZoneTiles) 
-        { 
-            safeTiles[tile.x, tile.y] = true; 
-        } 
-    } 
-    private void GenerateRingMap() 
-    { 
-        ringMap = new int[mapManager.Width, mapManager.Height]; 
-        for (int x = 0; x < mapManager.Width; x++) 
-        {
-            for (int y = mapManager.Height - 1; y >= 0; y--)
-            { 
-                ringMap[x, y] = -1;
-            } 
-        }
-        FloodFillFromBorders();
-        for (int y = 0; y < mapManager.Height; y++) 
-        {
-            string line = ""; 
-            for (int x = 0; x < mapManager.Width; x++) 
-            {
-                line += ringMap[x, y].ToString().PadLeft(3);
-            } 
-            Debug.Log(line); 
-        }
-    }
 
-    private void FloodFillFromBorders()
-    {
-        Queue<Vector2Int> queue = new Queue<Vector2Int>();
-
-        maxRing = 0;
-
-        // Borde superior e inferior
-        for (int x = 0; x < mapManager.Width; x++)
-        {
-            AddBorderTile(new Vector2Int(x, 0), queue);
-            AddBorderTile(new Vector2Int(x, mapManager.Height - 1), queue);
-        }
-
-        // Bordes izquierdo y derecho
-        for (int y = 0; y < mapManager.Height; y++)
-        {
-            AddBorderTile(new Vector2Int(0, y), queue);
-            AddBorderTile(new Vector2Int(mapManager.Width - 1, y), queue);
-        }
-
-        while (queue.Count > 0)
-        {
-            Vector2Int current = queue.Dequeue();
-
-            int nextDistance = ringMap[current.x, current.y] + 1;
-
-            TryVisit(current + Vector2Int.up, nextDistance, queue);
-            TryVisit(current + Vector2Int.down, nextDistance, queue);
-            TryVisit(current + Vector2Int.left, nextDistance, queue);
-            TryVisit(current + Vector2Int.right, nextDistance, queue);
-        }
-    }
-
-    private void TryVisit(Vector2Int tile, int distance, Queue<Vector2Int> queue) 
-    { 
-        if (tile.x < 0 || tile.y < 0) 
-            return;
-        if (tile.x >= mapManager.Width)
-            return;
-        if (tile.y >= mapManager.Height) 
-            return;
-        if (ringMap[tile.x, tile.y] != -1) 
-            return;
-        TileType type = mapManager.map.GetTileType(tile.x, tile.y);
-
-        if (type == TileType.WALL) 
-            return; 
-        if (safeTiles[tile.x, tile.y])
-            return;
-        ringMap[tile.x, tile.y] = distance;
-        if (distance > maxRing)
-            maxRing = distance;
-
-        queue.Enqueue(tile);
-    } 
-
-    private void SpawnPoisonTiles()
-    {
-        poisonObjects = new GameObject[mapManager.Width, mapManager.Height];
-        if (poisonAreaPrefab == null)
-        {
-            Debug.LogError("No hay Poison Area Prefab asignado.");
-            return;
-        }
-        for (int x = 0; x < mapManager.Width; x++)
-        {
-            for (int y = 0; y < mapManager.Height; y++)
-            {
-                TileType tile = mapManager.map.GetTileType(x, y);
-                if (tile == TileType.WALL) continue;
-                if (safeTiles[x, y]) continue;
-                Vector3 world = mapManager.LocalToWorld(new Vector2Int(x, y));
-                GameObject obj = Instantiate(poisonAreaPrefab, world, Quaternion.identity, poisonHolder);
-                obj.SetActive(false);
-                poisonObjects[x, y] = obj; 
-            }
-        }
-    }
-
-    private void AddBorderTile(Vector2Int tile, Queue<Vector2Int> queue)
-    {
-        TileType type = mapManager.map.GetTileType(tile.x, tile.y);
-
-        if (type == TileType.WALL)
-            return;
-
-        if (safeTiles[tile.x, tile.y])
-            return;
-
-        if (ringMap[tile.x, tile.y] != -1)
-            return;
-
-        ringMap[tile.x, tile.y] = 0;
-
-        queue.Enqueue(tile);
-    }
-
-    private void RefreshPoison()
-    {
-        if (mapManager == null)
-        {
-            Debug.LogError("mapManager es NULL");
-            return;
-        }
-
-        if (ringMap == null)
-        {
-            Debug.LogError("ringMap es NULL");
-            return;
-        }
-
-        if (poisonObjects == null)
-        {
-            Debug.LogError("poisonObjects es NULL");
-            return;
-        }
-
-        for (int x = 0; x < mapManager.Width; x++)
-        {
-            for (int y = 0; y < mapManager.Height; y++)
-            {
-                GameObject poison = poisonObjects[x, y];
-
-                if (poison == null)
-                    continue;
-
-                bool active = ringMap[x, y] <= currentRing;
-
-                poison.SetActive(active);
-            }
-        }
-    }
 }

@@ -189,10 +189,16 @@ public class MapManager : MonoBehaviour
         return this.display.transform.position + localF + (Vector3.one * 0.5f);
     }
 
+    public bool IsWalkableTile(Vector2Int local)
+    {
+        TileType tile = map.GetTileType(local.x, local.y);
+
+        return tile != TileType.WALL;
+    }
+
     public bool IsAGroundTile(Vector3 worldPoint)
     {
-        var local = this.WorldToLocal(worldPoint);
-        return this.map.GetTileType(local.x, local.y) == TileType.GROUND;
+        return IsWalkableTile(WorldToLocal(worldPoint));
     }
 
     public Vector3 SnapToTile(Vector3 worldPoint)
