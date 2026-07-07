@@ -21,6 +21,12 @@ public class StatusConditionArea : StatusConditionEffect, IMessageListener
         this.remainingTurns = this.turnCount;
         this.TryToResolveArea();
 
+        if (MessageManager.current == null)
+            return;
+
+        if (StatusConditionAreaManager.current == null)
+            return;
+
         MessageManager.current.AddListener(MessageTag.UNITCREATURE_MOVED, this);
         StatusConditionAreaManager.current.AddArea(this);
     }

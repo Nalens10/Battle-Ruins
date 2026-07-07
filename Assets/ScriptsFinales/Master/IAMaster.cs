@@ -9,6 +9,8 @@ public class IAMaster : Master
 
     protected UnitCreature lastTarget;
 
+    public int enemyCount=6;
+
     public override void BeginTurn()
     {
         this.lastTarget = null;
@@ -83,7 +85,9 @@ public class IAMaster : Master
 
     private IEnumerator TurnRutine()
     {
-        foreach (var unitCreature in this.unitCreatures)
+        List<UnitCreature> currentUnits = new List<UnitCreature>(this.unitCreatures);
+
+        foreach (var unitCreature in currentUnits)
         {
             Vector3 target = this.GenerateUnitCreatureTarget(unitCreature);
 
@@ -113,16 +117,28 @@ public class IAMaster : Master
 
     public override void SpawnUnitCreatures(List<Vector3> spawnPoints)
     {
-        int amount = Mathf.Min(enemyPrefabs.Length, spawnPoints.Count);
+        if (enemyPrefabs.Length == 0)
+        {
+            Debug.LogError("No hay Enemy Prefabs asignados.");
+            return;
+        }
+
+        List<Vector3> availableSpawns = new List<Vector3>(spawnPoints);
+
+        int amount = Mathf.Min(enemyCount, availableSpawns.Count);
 
         for (int i = 0; i < amount; i++)
         {
-            CreateUnitCreature(enemyPrefabs[i], spawnPoints[i]);
-        }
+            int spawnIndex = Random.Range(0, availableSpawns.Count);
 
-        if (enemyPrefabs.Length > spawnPoints.Count)
-        {
-            Debug.LogWarning("No hay suficientes SpawnPoints para todos los enemigos.");
+            Vector3 spawn = availableSpawns[spawnIndex];
+
+            GameObject prefab =
+                enemyPrefabs[Random.Range(0, enemyPrefabs.Length)];
+
+            CreateUnitCreature(prefab, spawn);
+
+            availableSpawns.RemoveAt(spawnIndex);
         }
     }
 }

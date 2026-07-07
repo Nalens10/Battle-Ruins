@@ -14,9 +14,14 @@ public abstract class Master : MonoBehaviour
 
     protected void BeginTurnToAllUnitCreatures()
     {
-        foreach (var unitCreature in this.unitCreatures)
+        List<UnitCreature> units = new List<UnitCreature>(this.unitCreatures);
+
+        foreach (var unitCreature in units)
         {
-            unitCreature.BeginTurn();
+            if (unitCreature != null)
+            {
+                unitCreature.BeginTurn();
+            }
         }
     }
 

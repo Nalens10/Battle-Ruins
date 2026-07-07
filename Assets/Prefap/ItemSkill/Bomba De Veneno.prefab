@@ -51,7 +51,7 @@ MonoBehaviour:
   cost: 1
   distancePenalizationMultiplier: 0.1
   itemSkillName: Bomba de Veneno
-  vfx: {fileID: 172378031835797992, guid: 88918c711aa3d4b4c8c343d7c973c48f, type: 3}
+  vfx: {fileID: 172378031835797992, guid: f16bb268a7ca98e4fa5b1f19b1e7c973, type: 3}
   elementalType: 0
   isSpawner: 1
 --- !u!114 &2553233561830267951
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d755800186eaf841928e5ab95136e72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prfb: {fileID: 172378031835797992, guid: c713b439409f6554e934ef211e15c3e6, type: 3}
+  prfb: {fileID: 172378031835797992, guid: f16bb268a7ca98e4fa5b1f19b1e7c973, type: 3}
   requiresEmptySpace: 0
 --- !u!1 &4283319021269688853
 GameObject:
