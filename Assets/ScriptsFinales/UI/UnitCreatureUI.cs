@@ -16,7 +16,8 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
 
     public TextMeshProUGUI elementalTypeLabel;
 
-    public DynamicItemSkillUIList dynButtonList;
+    public DynamicItemSkillUIList inventoryButtonList;
+    public DynamicItemSkillUIList uniqueSkillButtonList;
     public DynamicItemSkillUIList dynStatList;
 
     public StatusConditionListUI statusConditionListUI;
@@ -28,7 +29,8 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
         MessageManager.current.AddListener(MessageTag.UNITCREATURE_SELECTED, this);
         MessageManager.current.AddListener(MessageTag.UNITCREATURE_UPDATED, this);
 
-        this.dynButtonList.ConfigureAndHide();
+        inventoryButtonList.ConfigureAndHide();
+        uniqueSkillButtonList.ConfigureAndHide();
         this.dynStatList.ConfigureAndHide();
 
         this.Hide();
@@ -66,7 +68,7 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
 
     public void AddItemSkillButtton(ItemInstance item, UnityAction onClick)
     {
-        ItemSkillButton btn = dynButtonList.GetNextItemAndActivate<ItemSkillButton>();
+        ItemSkillButton btn = inventoryButtonList.GetNextItemAndActivate<ItemSkillButton>();
 
         btn.Configure(
             item.itemSkill.itemSkillName,
@@ -83,7 +85,8 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
     {
         this.gameObject.SetActive(false);
 
-        this.dynButtonList.HideAll();
+        inventoryButtonList.HideAll();
+        uniqueSkillButtonList.HideAll();
         this.dynStatList.HideAll();
     }
 
@@ -93,7 +96,8 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
         {
             UnitCreatureSelectedMessage csm = msg as UnitCreatureSelectedMessage;
 
-            this.dynButtonList.HideAll();
+            inventoryButtonList.HideAll();
+            uniqueSkillButtonList.HideAll();
             this.dynStatList.HideAll();
 
             this.selectedUnitCreature = csm.unitCreature;
@@ -106,6 +110,7 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
                 if (this.selectedUnitCreature.master is PlayerMaster)
                 {
                     RefreshInventory();
+                    RefreshUniqueSkill();
                 }
             }
             else
@@ -129,28 +134,59 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
                     this.selectedUnitCreature.GetCurrentStatusConditions());
 
                 RefreshInventory();
+                RefreshUniqueSkill();
             }
         }
     }
 
-    private void RefreshInventory()
+    public void RefreshInventory()
     {
-        this.dynButtonList.HideAll();
+        inventoryButtonList.HideAll();
 
-        foreach (ItemInstance item in this.selectedUnitCreature.inventory)
+        if (selectedUnitCreature == null)
+            return;
+
+        foreach (ItemInstance item in selectedUnitCreature.inventory)
         {
-            ItemSkill skill = item.itemSkill;
-
-            this.AddItemSkillButtton(
+            AddItemSkillButtton(
                 item,
                 () =>
                 {
                     MessageManager.current.Send(
                         new UnitCreatureActionItemSkillMessage(
-                            this.selectedUnitCreature,
+                            selectedUnitCreature,
                             item));
                 });
         }
+    }
+
+    public void RefreshUniqueSkill()
+    {
+        uniqueSkillButtonList.HideAll();
+
+        if (selectedUnitCreature == null)
+            return;
+
+        if (selectedUnitCreature.uniqueSkill == null)
+            return;
+
+        AddUniqueSkillButton(
+            selectedUnitCreature.uniqueSkill,
+            () =>
+            {
+                MessageManager.current.Send(
+                    new UnitCreatureActionItemSkillMessage(
+                        selectedUnitCreature,
+                        selectedUnitCreature.uniqueSkill));
+            });
+    }
+
+
+    public void AddUniqueSkillButton(UniqueItemSkill skill, UnityAction onClick)
+    {
+        ItemSkillButton btn = uniqueSkillButtonList.GetNextItemAndActivate<ItemSkillButton>();
+
+        btn.ConfigureUniqueSkill( skill.itemSkillName, onClick, skill,selectedUnitCreature);
     }
 
 }

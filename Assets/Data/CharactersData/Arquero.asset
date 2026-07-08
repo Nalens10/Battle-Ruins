@@ -15,3 +15,4 @@ MonoBehaviour:
   characterName: Arquero
   unitCreaturePrfbs: {fileID: 3947856001648848478, guid: 6e4fe22eecc4cbc4abc4dc997c96110c, type: 3}
   characterSprite: {fileID: 21300000, guid: ddeead0fd005fcd43b8cbf7a95bb4ea4, type: 3}
+  uniqueSkill: {fileID: 7494680432756551884, guid: bc3379496a2f7bf42a0ba8000cc03ccf, type: 3}

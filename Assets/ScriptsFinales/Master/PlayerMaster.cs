@@ -140,9 +140,25 @@ public class PlayerMaster : Master, IMessageListener
 
     public override void SpawnUnitCreatures(List<Vector3> spawnPoints)
     {
-        CreateUnitCreature(
-            playerData.selectedCharacter.unitCreaturePrfbs,
-            spawnPoints[0]
-        );
+        GameObject go = Instantiate(playerData.selectedCharacter.unitCreaturePrfbs);
+
+        UnitCreature unit = go.GetComponent<UnitCreature>();
+
+        unit.uniqueSkill = Instantiate(playerData.selectedCharacter.uniqueSkill);
+
+        unit.transform.position = spawnPoints[0];
+
+        AdoptUnitCreature(unit);
+    }
+
+    public void GoToUniqueSkillMode()
+    {
+        selectedInventoryItem = null;
+
+        PlayerMaster player = selectedUnitCreature.master as PlayerMaster;
+
+        UniqueItemSkill skill = player.playerData.selectedCharacter.uniqueSkill;
+
+        status = PlayerCombatStatus.ITEMSKILL;
     }
 }

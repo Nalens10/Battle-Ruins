@@ -152,19 +152,21 @@ MonoBehaviour:
   master: {fileID: 0}
   stats:
     elementalType: 0
-    hp: 100
-    maxhp: 100
+    hp: 55
+    maxhp: 55
     energy: 2
     maxEnergy: 2
     attack: 4
     defense: 4
-    elemAttack: 8
+    elemAttack: 10
     elemDefense: 8
-    accuracy: 7
+    accuracy: 8
     evasion: 7
     speed: 6
   inventory: []
   maxInventory: 4
+  currentUniqueCooldown: 0
+  uniqueSkill: {fileID: 0}
 --- !u!1 &544151547522071849
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,3 +15,4 @@ MonoBehaviour:
   characterName: Brujo
   unitCreaturePrfbs: {fileID: 244593149139030731, guid: 2f889433075368946b0f47f6a842639c, type: 3}
   characterSprite: {fileID: 21300000, guid: 60e65a122f48fea41bcca5e99255bdca, type: 3}
+  uniqueSkill: {fileID: 8521603808238267410, guid: b8887c0da0f91e54194196e175157e2a, type: 3}

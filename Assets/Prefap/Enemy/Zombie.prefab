@@ -52,17 +52,21 @@ MonoBehaviour:
   master: {fileID: 0}
   stats:
     elementalType: 4
-    hp: 40
-    maxhp: 40
+    hp: 35
+    maxhp: 35
     energy: 2
     maxEnergy: 2
-    attack: 4
-    defense: 4
-    elemAttack: 4
-    elemDefense: 4
+    attack: 3
+    defense: 2
+    elemAttack: 0
+    elemDefense: 0
     accuracy: 4
-    evasion: 4
+    evasion: 2
     speed: 4
+  inventory: []
+  maxInventory: 4
+  currentUniqueCooldown: 0
+  uniqueSkill: {fileID: 0}
 --- !u!1 &2407127824314094196
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,6 +278,10 @@ PrefabInstance:
     - target: {fileID: 2119393806341078459, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
       propertyPath: m_Name
       value: Mordida
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147701139438275091, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: power
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
       propertyPath: m_LocalPosition.x

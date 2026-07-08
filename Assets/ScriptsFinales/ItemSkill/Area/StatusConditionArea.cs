@@ -28,6 +28,7 @@ public class StatusConditionArea : StatusConditionEffect, IMessageListener
             return;
 
         MessageManager.current.AddListener(MessageTag.UNITCREATURE_MOVED, this);
+        MessageManager.current.AddListener(MessageTag.NEXT_TURN, this);
         StatusConditionAreaManager.current.AddArea(this);
     }
 
@@ -38,7 +39,9 @@ public class StatusConditionArea : StatusConditionEffect, IMessageListener
         if (this.isDepleted)
         {
             MessageManager.current.RemoveListener(MessageTag.UNITCREATURE_MOVED, this);
-            Destroy(this.gameObject);
+            MessageManager.current.RemoveListener(MessageTag.NEXT_TURN, this);
+
+            Destroy(gameObject);
         }
     }
 
@@ -53,22 +56,41 @@ public class StatusConditionArea : StatusConditionEffect, IMessageListener
 
     protected void ResolveArea(UnitCreature target)
     {
-        this.remainingUses--;
-        this.Resolve(null, target);
+        remainingUses--;
+
+        int damage = Mathf.RoundToInt(target.stats.maxhp * 0.05f);
+
+        int damageTaken = target.DamageWithClamp(damage);
+
+        if (damageTaken > 0)
+        {
+            MessageManager.current.Send(
+                new ItemSkillHealthModMessage(
+                    null,
+                    target,
+                    -damageTaken,
+                    false));
+        }
     }
 
     public void Receive(Message msg)
     {
-        UnitCreatureMovedMessage cmm = msg as UnitCreatureMovedMessage;
-
-        bool intersectPosition = GameManager.current.mapManager.AreSameTile(
-            cmm.unitCreature.transform.position,
-            this.transform.position
-        );
-
-        if (intersectPosition)
+        if (msg is UnitCreatureMovedMessage moved)
         {
-            this.ResolveArea(cmm.unitCreature);
+            bool intersectPosition = GameManager.current.mapManager.AreSameTile(
+                moved.unitCreature.transform.position,
+                this.transform.position
+            );
+
+            if (intersectPosition)
+            {
+                ResolveArea(moved.unitCreature);
+            }
+        }
+
+        if (msg is NextTurnMessage)
+        {
+            TryToResolveArea();
         }
     }
 }

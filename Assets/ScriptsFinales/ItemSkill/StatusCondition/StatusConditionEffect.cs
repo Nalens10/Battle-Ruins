@@ -23,9 +23,20 @@ public class StatusConditionEffect : MonoBehaviour, IEffect
     {
         foreach (var cond in this.conditions)
         {
+            StatusCondition existing =
+                receiver.GetStatusCondition(cond.GetType());
+
+            if (existing != null)
+            {
+                existing.Refresh();
+                continue;
+            }
+
             GameObject parasiteObj = Instantiate(cond.gameObject);
 
-            StatusCondition condition = parasiteObj.GetComponent<StatusCondition>();
+            StatusCondition condition =
+                parasiteObj.GetComponent<StatusCondition>();
+
             condition.Configure(receiver);
 
             receiver.AddStatusCondition(condition);

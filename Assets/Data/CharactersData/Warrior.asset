@@ -15,3 +15,4 @@ MonoBehaviour:
   characterName: Warrior
   unitCreaturePrfbs: {fileID: 591142100437250493, guid: 1796782ed91100e4786999627edacadb, type: 3}
   characterSprite: {fileID: 21300000, guid: adedd64fb227af646bbebcc963f2655f, type: 3}
+  uniqueSkill: {fileID: 4619366627134726279, guid: e764a7e5c218b2e46958858cc34b53be, type: 3}

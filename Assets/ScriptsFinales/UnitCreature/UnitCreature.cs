@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 
 // Les dejo en verde lo que hace ;)
 public class UnitCreature : MonoBehaviour
@@ -23,6 +24,10 @@ public class UnitCreature : MonoBehaviour
     public bool isMoving { get; protected set; }
 
     public int maxInventory = 4;
+
+    public int currentUniqueCooldown;
+
+    public UniqueItemSkill uniqueSkill;
 
     void Start()
     {
@@ -53,6 +58,19 @@ public class UnitCreature : MonoBehaviour
         return this.conditions.ToArray();
     }
 
+    public StatusCondition GetStatusCondition(System.Type type)
+    {
+        foreach (StatusCondition condition in conditions)
+        {
+            if (condition.GetType() == type)
+            {
+                return condition;
+            }
+        }
+
+        return null;
+    }
+
     public void ModifyHealth(int amount)
     {
         int newHP = this.stats.hp + amount;
@@ -67,10 +85,16 @@ public class UnitCreature : MonoBehaviour
 
     public int DamageWithClamp(int amount)
     {
-        int targetHp = Mathf.Clamp(this.stats.hp - amount, 1, this.stats.maxhp);
+        int targetHp = Mathf.Clamp(this.stats.hp - amount, 0,this.stats.maxhp);
+
         int damageTaken = this.stats.hp - targetHp;
 
         this.stats.hp = targetHp;
+
+        if (this.stats.hp <= 0)
+        {
+            this.master.OnUnitCreatureDeath(this);
+        }
 
         return damageTaken;
     }
@@ -87,6 +111,8 @@ public class UnitCreature : MonoBehaviour
 
     public void BeginTurn()
     {
+        if (currentUniqueCooldown > 0) currentUniqueCooldown--;
+
         this.UpdateEnergy(this.stats.maxEnergy);
 
         for (int i = 0; i < this.conditions.Count; i++)
@@ -234,6 +260,16 @@ public class UnitCreature : MonoBehaviour
         }
 
         MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
+    }
+
+    public bool CanUseUniqueSkill()
+    {
+        return currentUniqueCooldown <= 0;
+    }
+
+    public void ConsumeUniqueSkill()
+    {
+        currentUniqueCooldown = uniqueSkill.cooldownTurns;
     }
 
 }

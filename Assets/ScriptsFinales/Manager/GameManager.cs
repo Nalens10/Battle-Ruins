@@ -1,6 +1,4 @@
-
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using static UnityEditor.Progress;
 
@@ -158,26 +156,34 @@ public class GameManager : MonoBehaviour
 
     protected void CheckForGameOver()
     {
-        int unitCreatureCount = this.gameUnitCreatures.Count;
-        if (unitCreatureCount == 0)
+        List<PlayerMaster> alivePlayers = new List<PlayerMaster>();
+
+        foreach (Master master in masters)
         {
-            Debug.LogWarning("Empate!!  ??");
-            this.isGameOver = true;
+            if (master is PlayerMaster player && player.HasAliveUnitCreatures())
+            {
+                alivePlayers.Add(player);
+            }
         }
 
-        Master player = this.masters[0];
-        Master ia = this.masters[1];
-
-        if (player.HasAliveUnitCreatures() && ia.HasAliveUnitCreatures() == false)
+        // Todos los jugadores murieron
+        if (alivePlayers.Count == 0)
         {
-            this.isGameOver = true;
-            MessageManager.current.Send(new GameOverMessage(player, ia));
+            Debug.Log("Todos los jugadores fueron eliminados.");
+            isGameOver = true;
+            return;
         }
 
-        if (ia.HasAliveUnitCreatures() && player.HasAliveUnitCreatures() == false)
+        // Sólo queda un jugador humano
+        if (alivePlayers.Count == 1)
         {
-            this.isGameOver = true;
-            MessageManager.current.Send(new GameOverMessage(ia, player));
+            isGameOver = true;
+
+            PlayerMaster winner = alivePlayers[0];
+
+            MessageManager.current.Send(new GameOverMessage(winner, null));
+
+            Debug.Log("Ganador: " + winner.masterName);
         }
     }
 
@@ -365,8 +371,22 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
+        if (itemSkill is UniqueItemSkill)
+        {
+            if (!emitter.CanUseUniqueSkill())
+            {
+                Debug.Log("Unique Skill en cooldown.");
+                return false;
+            }
+        }
+
         if (itemSkill.isSpawner)
         {
+            if (itemSkill is UniqueItemSkill)
+            {
+                emitter.ConsumeUniqueSkill();
+            }
+
             emitter.ConsumeEnergyFor(itemSkill);
             itemSkill.ResolveAsSpawner(emitter, area);
 
@@ -384,14 +404,19 @@ public class GameManager : MonoBehaviour
 
         emitter.ConsumeEnergyFor(itemSkill);
 
+        if (itemSkill is UniqueItemSkill)
+        {
+            emitter.ConsumeUniqueSkill();
+        }
+
         foreach (var point in area)
         {
             UnitCreature receiver = this.GetUnitCreatureAtPosition(point);
+
             if (receiver != null)
             {
                 itemSkill.ResolveForReceiver(emitter, receiver);
             }
-            
         }
         ItemViewerManager.current.Hide();
         return true;

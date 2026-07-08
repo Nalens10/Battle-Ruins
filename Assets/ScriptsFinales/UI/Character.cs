@@ -11,4 +11,6 @@ public class Character : ScriptableObject
     public GameObject unitCreaturePrfbs;
 
     public Sprite characterSprite;
+
+    public UniqueItemSkill uniqueSkill;
 }

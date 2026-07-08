@@ -45,6 +45,35 @@ public class ItemSkillButton : MonoBehaviour, ISelectHandler, IDeselectHandler
             "\nUses: " + item.remainingUses;
     }
 
+    public void ConfigureUniqueSkill(string text, UnityAction onClick, UniqueItemSkill skill, UnitCreature owner)
+    {
+        itemSkill = skill;
+        itemInstance = null;
+
+        label.text = text;
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(onClick);
+
+        itemSkillCost.gameObject.SetActive(true);
+
+        if (owner.CanUseUniqueSkill())
+        {
+            itemSkillCost.text =
+                "Cost: " + skill.cost +
+                "\nReady";
+
+            btn.interactable = true;
+        }
+        else
+        {
+            itemSkillCost.text =
+                "Cooldown: " + owner.currentUniqueCooldown;
+
+            btn.interactable = false;
+        }
+    }
+
     public void OnSelect(BaseEventData eventData)
     {
         Debug.Log("SELECT");

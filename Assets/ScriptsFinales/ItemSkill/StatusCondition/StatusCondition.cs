@@ -116,4 +116,9 @@ public abstract class StatusCondition : MonoBehaviour
 
     protected abstract void ExecuteOnTurnStart(Stats targetStats);
     protected abstract void ExecuteStatsModifiers(Stats targetStats);
+
+    public void Refresh()
+    {
+        this.remainingTurns = this.turnCount;
+    }
 }

@@ -171,15 +171,17 @@ MonoBehaviour:
     maxhp: 100
     energy: 2
     maxEnergy: 2
-    attack: 4
-    defense: 8
+    attack: 5
+    defense: 10
     elemAttack: 4
-    elemDefense: 8
+    elemDefense: 10
     accuracy: 5
-    evasion: 10
+    evasion: 3
     speed: 4
   inventory: []
   maxInventory: 4
+  currentUniqueCooldown: 0
+  uniqueSkill: {fileID: 0}
 --- !u!1 &6783754231821054517
 GameObject:
   m_ObjectHideFlags: 0
