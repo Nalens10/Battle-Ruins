@@ -369,7 +369,10 @@ public class GameManager : MonoBehaviour
         {
             emitter.ConsumeEnergyFor(itemSkill);
             itemSkill.ResolveAsSpawner(emitter, area);
-            return false;
+
+            ItemViewerManager.current.Hide();
+
+            return true;
         }
 
 

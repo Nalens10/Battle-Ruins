@@ -47,14 +47,20 @@ public class ItemSkillButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
+        Debug.Log("SELECT");
+
+        Debug.Log(ItemViewerManager.current);
+
+        if (ItemViewerManager.current == null)
+        {
+            Debug.LogError("ItemViewerManager.current es NULL");
+            return;
+        }
+
         if (itemInstance != null)
-        {
             ItemViewerManager.current.Show(itemInstance);
-        }
         else if (itemSkill != null)
-        {
             ItemViewerManager.current.Show(itemSkill);
-        }
     }
 
     public void OnDeselect(BaseEventData eventData)

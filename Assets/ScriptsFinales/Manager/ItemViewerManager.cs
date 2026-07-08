@@ -30,6 +30,16 @@ public class ItemViewerManager : MonoBehaviour
 
     public void Show(ItemInstance item)
     {
+        Debug.Log("CURRENT = " + current);
+        Debug.Log("ICON = " + icon);
+        Debug.Log("NAME = " + nameItem);
+        Debug.Log("ELEMENT = " + elementItem);
+        Debug.Log("STATUS = " + statusConditionItem);
+        Debug.Log("DAMAGE = " + damageItem);
+        Debug.Log("USES = " + usesItem);
+        Debug.Log("COST = " + costItem);
+
+
         gameObject.SetActive(true);
 
         ItemSkill skill = item.itemSkill;
@@ -51,6 +61,16 @@ public class ItemViewerManager : MonoBehaviour
 
     public void Show(ItemSkill skill)
     {
+        Debug.Log("CURRENT = " + current);
+        Debug.Log("ICON = " + icon);
+        Debug.Log("NAME = " + nameItem);
+        Debug.Log("ELEMENT = " + elementItem);
+        Debug.Log("STATUS = " + statusConditionItem);
+        Debug.Log("DAMAGE = " + damageItem);
+        Debug.Log("USES = " + usesItem);
+        Debug.Log("COST = " + costItem);
+
+
         gameObject.SetActive(true);
 
         icon.sprite = skill.worldSprite;

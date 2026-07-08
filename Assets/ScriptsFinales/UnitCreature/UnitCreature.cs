@@ -226,16 +226,14 @@ public class UnitCreature : MonoBehaviour
 
     public void UseInventoryItem(ItemInstance item)
     {
-        Debug.Log("USE INVENTORY ITEM");
+        item.ConsumeUse();
 
-        item.remainingUses--;
-
-        if (item.remainingUses <= 0)
+        if (item.IsDepleted)
         {
             inventory.Remove(item);
         }
 
-        MessageManager.current.Send( new UnitCreatureUpdatedMessage(this));
+        MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
     }
 
 }

@@ -8,4 +8,18 @@ public class ItemInstance
     public ItemSkill itemSkill;
 
     public int remainingUses;
+
+    public bool IsDepleted
+    {
+        get
+        {
+            return remainingUses <= 0;
+        }
+    }
+
+    public bool ConsumeUse()
+    {
+        remainingUses--;
+        return IsDepleted;
+    }
 }
