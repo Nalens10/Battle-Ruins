@@ -1,33 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSkillButton : MonoBehaviour
+public class ItemSkillButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     public TextMeshProUGUI label;
     public TextMeshProUGUI itemSkillCost;
     public Button btn;
 
-    public void Configure(string text, UnityAction onClick, ItemSkill itemSkill)
+    private ItemSkill itemSkill;
+    private ItemInstance itemInstance;
+
+    public void Configure(string text, UnityAction onClick, ItemSkill skill)
     {
-        this.label.text = text;
+        itemSkill = skill;
+        itemInstance = null;
 
-        this.btn.onClick.RemoveAllListeners();
-        this.btn.onClick.AddListener(onClick);
+        label.text = text;
 
-        if (itemSkill != null)
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(onClick);
+
+        itemSkillCost.gameObject.SetActive(true);
+        itemSkillCost.text = "Cost: " + skill.cost;
+    }
+
+    public void Configure(string text, UnityAction onClick, ItemInstance item)
+    {
+        itemInstance = item;
+        itemSkill = item.itemSkill;
+
+        label.text = text;
+
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(onClick);
+
+        itemSkillCost.gameObject.SetActive(true);
+        itemSkillCost.text =
+            "Cost: " + item.itemSkill.cost +
+            "\nUses: " + item.remainingUses;
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        if (itemInstance != null)
         {
-            this.itemSkillCost.gameObject.SetActive(true);
-            this.itemSkillCost.text = "Cost: " + itemSkill.cost.ToString();
-
+            ItemViewerManager.current.Show(itemInstance);
         }
-        else
+        else if (itemSkill != null)
         {
-            this.itemSkillCost.gameObject.SetActive(false);
+            ItemViewerManager.current.Show(itemSkill);
         }
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        ItemViewerManager.current.Hide();
     }
 }

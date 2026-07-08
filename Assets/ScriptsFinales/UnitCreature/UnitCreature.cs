@@ -18,7 +18,11 @@ public class UnitCreature : MonoBehaviour
 
     private List<StatusCondition> conditions = new List<StatusCondition>();
 
+    public List<ItemInstance> inventory = new List<ItemInstance>();
+
     public bool isMoving { get; protected set; }
+
+    public int maxInventory = 4;
 
     void Start()
     {
@@ -169,6 +173,30 @@ public class UnitCreature : MonoBehaviour
         }
 
         this.isMoving = false;
+
+        // Buscar un item en la casilla donde terminó
+        WorldItem worldItem = GameManager.current.FindItemAtPosition(transform.position);
+
+        if (worldItem != null)
+        {
+            if (AddItem(worldItem.itemSkill))
+            {
+                Debug.Log("Recogió: " + worldItem.itemSkill.itemSkillName);
+
+                ItemSpawnerManager spawner = FindObjectOfType<ItemSpawnerManager>();
+
+                if (spawner != null)
+                {
+                    spawner.RemoveItem(worldItem);
+                }
+
+                Destroy(worldItem.gameObject);
+            }
+            else
+            {
+                Debug.Log("Inventario lleno.");
+            }
+        }
     }
 
     public int GetEnergyCostForPathLength(int length)
@@ -182,4 +210,32 @@ public class UnitCreature : MonoBehaviour
     {
         return this.GetComponentsInChildren<ItemSkill>();
     }
+
+    public bool AddItem(ItemSkill item)
+    {
+        ItemSkill copy = Instantiate(item);
+
+        inventory.Add(new ItemInstance()
+        {
+            itemSkill = copy,
+            remainingUses = copy.maxUses
+        });
+
+        return true;
+    }
+
+    public void UseInventoryItem(ItemInstance item)
+    {
+        Debug.Log("USE INVENTORY ITEM");
+
+        item.remainingUses--;
+
+        if (item.remainingUses <= 0)
+        {
+            inventory.Remove(item);
+        }
+
+        MessageManager.current.Send( new UnitCreatureUpdatedMessage(this));
+    }
+
 }

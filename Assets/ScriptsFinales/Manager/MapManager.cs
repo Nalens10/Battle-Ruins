@@ -224,4 +224,26 @@ public class MapManager : MonoBehaviour
     {
         get { return map.height; }
     }
+
+    public Vector3 GetRandomGroundTile()
+    {
+        int attempts = 500;
+
+        while (attempts > 0)
+        {
+            attempts--;
+
+            int x = Random.Range(0, map.width);
+            int y = Random.Range(0, map.height);
+
+            Vector3 worldPos = LocalToWorld(new Vector2Int(x, y));
+
+            if (IsAGroundTile(worldPos))
+            {
+                return worldPos;
+            }
+        }
+
+        return Vector3.zero;
+    }
 }

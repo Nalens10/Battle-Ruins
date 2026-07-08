@@ -12,6 +12,8 @@ public enum PlayerCombatStatus
 public class PlayerMaster : Master, IMessageListener
 {
     public PlayerData playerData;
+
+    public ItemInstance selectedInventoryItem { get; protected set; }
     public void Initialize(PlayerData data)
     {
         playerData = data;
@@ -68,7 +70,22 @@ public class PlayerMaster : Master, IMessageListener
                 GameManager.current.MoveUnitCreatureTo(this.selectedUnitCreature, worldPos);
                 break;
             case PlayerCombatStatus.ITEMSKILL:
-                GameManager.current.TryToPerformItemSkillAtPoint(this.selectedUnitCreature, this.selectedItemSkill, worldPos);
+
+                if (this.selectedInventoryItem != null)
+                {
+                    GameManager.current.TryToPerformItemSkillAtPoint(
+                        this.selectedUnitCreature,
+                        this.selectedInventoryItem,
+                        worldPos);
+                }
+                else
+                {
+                    GameManager.current.TryToPerformItemSkillAtPoint(
+                        this.selectedUnitCreature,
+                        this.selectedItemSkill,
+                        worldPos);
+                }
+
                 this.GoToMoveMode();
                 break;
         }
@@ -83,20 +100,40 @@ public class PlayerMaster : Master, IMessageListener
 
         if (msg is UnitCreatureActionItemSkillMessage)
         {
-           UnitCreatureActionItemSkillMessage casm = msg as UnitCreatureActionItemSkillMessage;
-            this.GoToSkillMode(casm.itemSkill);
+            UnitCreatureActionItemSkillMessage casm =
+                msg as UnitCreatureActionItemSkillMessage;
+
+            if (casm.inventoryItem != null)
+            {
+                this.GoToSkillMode(casm.inventoryItem);
+            }
+            else
+            {
+                this.GoToSkillMode(casm.itemSkill);
+            }
         }
+
     }
 
     public void GoToMoveMode()
     {
         this.selectedItemSkill = null;
+        this.selectedInventoryItem = null;
+
         this.status = PlayerCombatStatus.MOVE;
     }
 
     public void GoToSkillMode(ItemSkill itemSkill)
     {
         this.selectedItemSkill = itemSkill;
+
+        this.status = PlayerCombatStatus.ITEMSKILL;
+    }
+
+    public void GoToSkillMode(ItemInstance item)
+    {
+        this.selectedInventoryItem = item;
+        this.selectedItemSkill = item.itemSkill;
 
         this.status = PlayerCombatStatus.ITEMSKILL;
     }

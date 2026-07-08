@@ -45,11 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSkillName: Mordida
+  worldSprite: {fileID: 0}
+  maxUses: 1000
+  cost: 1
   range: 1
   area: 0
-  cost: 1
   distancePenalizationMultiplier: 0.1
-  itemSkillName: Mordida
   vfx: {fileID: 0}
   elementalType: 0
   isSpawner: 0

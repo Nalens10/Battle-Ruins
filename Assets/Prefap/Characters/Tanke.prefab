@@ -112,9 +112,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7343565551230316153}
-  - {fileID: 9070521777180300524}
+  m_Children: []
   m_Father: {fileID: 3063184157990795022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6724370596523249326
@@ -180,6 +178,8 @@ MonoBehaviour:
     accuracy: 5
     evasion: 10
     speed: 4
+  inventory: []
+  maxInventory: 4
 --- !u!1 &6783754231821054517
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,127 +280,3 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!1001 &4674247352588444886
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1563264660754691726}
-    m_Modifications:
-    - target: {fileID: 499619048124896517, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_Name
-      value: CruzHelada
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
---- !u!4 &9070521777180300524 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4413162923835191354, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-  m_PrefabInstance: {fileID: 4674247352588444886}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &5080701479272065548
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1563264660754691726}
-    m_Modifications:
-    - target: {fileID: 2509526807507150471, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_Name
-      value: CruzBendita
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
---- !u!4 &7343565551230316153 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2552365497512412277, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-  m_PrefabInstance: {fileID: 5080701479272065548}
-  m_PrefabAsset: {fileID: 0}

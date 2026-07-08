@@ -18,7 +18,18 @@ public class DamageEffect : MonoBehaviour, IEffect
 
     public void Resolve(UnitCreature emitter, UnitCreature receiver)
     {
-        ItemSkill parentSkill = this.GetComponent<ItemSkill>();
+        Debug.Log("Emitter: " + emitter);
+        Debug.Log("Receiver: " + receiver);
+
+        ItemSkill parentSkill = GetComponent<ItemSkill>();
+
+        Debug.Log("ParentSkill: " + parentSkill);
+
+        if (parentSkill == null)
+        {
+            Debug.LogError("DamageEffect no encontró ItemSkill");
+            return;
+        }
 
         Stats eStats = emitter.GetCurrentStats();
         Stats rStats = receiver.GetCurrentStats();

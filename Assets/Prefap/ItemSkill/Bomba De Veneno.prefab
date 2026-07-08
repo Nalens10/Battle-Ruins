@@ -46,13 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 7
-  area: 2
-  cost: 1
-  distancePenalizationMultiplier: 0.1
   itemSkillName: Bomba de Veneno
+  worldSprite: {fileID: 21300000, guid: 7f6dd0c8bffef3d4993e2fe154ba07a6, type: 3}
+  maxUses: 1
+  cost: 1
+  range: 3
+  area: 2
+  distancePenalizationMultiplier: 0.1
   vfx: {fileID: 172378031835797992, guid: f16bb268a7ca98e4fa5b1f19b1e7c973, type: 3}
-  elementalType: 0
+  elementalType: 5
   isSpawner: 1
 --- !u!114 &2553233561830267951
 MonoBehaviour:

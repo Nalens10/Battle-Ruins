@@ -64,10 +64,14 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
         }
     }
 
-    public void AddItemSkillButtton(string itemSkillName, ItemSkill itemSkill, UnityAction onClick)
+    public void AddItemSkillButtton(ItemInstance item, UnityAction onClick)
     {
-        ItemSkillButton btn = this.dynButtonList.GetNextItemAndActivate<ItemSkillButton>();
-        btn.Configure(itemSkillName, onClick, itemSkill);
+        ItemSkillButton btn = dynButtonList.GetNextItemAndActivate<ItemSkillButton>();
+
+        btn.Configure(
+            item.itemSkill.itemSkillName,
+            onClick,
+            item);
     }
 
     public void Show()
@@ -101,19 +105,7 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
 
                 if (this.selectedUnitCreature.master is PlayerMaster)
                 {
-                    ItemSkill[] itemSkills = this.selectedUnitCreature.GetItemSkills();
-
-                    // Agregar botones para cada item skill
-
-                    foreach (var itemSkill in itemSkills)
-                    {
-                        this.AddItemSkillButtton(itemSkill.name, itemSkill, () =>
-                        {
-                            MessageManager.current.Send(
-                                new UnitCreatureActionItemSkillMessage(this.selectedUnitCreature, itemSkill)
-                            );
-                        });
-                    }
+                    RefreshInventory();
                 }
             }
             else
@@ -130,9 +122,35 @@ public class UnitCreatureUI : MonoBehaviour, IMessageListener
             if (this.selectedUnitCreature == cm.unitCreature)
             {
                 this.dynStatList.HideAll();
-                this.DisplayStats(this.selectedUnitCreature.GetBaseStats(), this.selectedUnitCreature.GetCurrentStats());
-                this.statusConditionListUI.DisplayStatusConditions(this.selectedUnitCreature.GetCurrentStatusConditions());
+
+                this.DisplayStats( this.selectedUnitCreature.GetBaseStats(), this.selectedUnitCreature.GetCurrentStats());
+
+                this.statusConditionListUI.DisplayStatusConditions(
+                    this.selectedUnitCreature.GetCurrentStatusConditions());
+
+                RefreshInventory();
             }
         }
     }
+
+    private void RefreshInventory()
+    {
+        this.dynButtonList.HideAll();
+
+        foreach (ItemInstance item in this.selectedUnitCreature.inventory)
+        {
+            ItemSkill skill = item.itemSkill;
+
+            this.AddItemSkillButtton(
+                item,
+                () =>
+                {
+                    MessageManager.current.Send(
+                        new UnitCreatureActionItemSkillMessage(
+                            this.selectedUnitCreature,
+                            item));
+                });
+        }
+    }
+
 }

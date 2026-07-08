@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 // Les dejo en verde lo que hace ;)
 public class GameManager : MonoBehaviour
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
 
     public BattleRoyaleZoneManager battleRoyale;
 
+    public ItemSpawnerManager itemSpawner;
+
     void Awake()
     {
         current = this;
@@ -34,15 +37,19 @@ public class GameManager : MonoBehaviour
     void Start()
     {
 
-        this.gameUnitCreatures = new List<UnitCreature>();
-        this.graveyard = new List<UnitCreature>();
+        gameUnitCreatures = new List<UnitCreature>();
+        graveyard = new List<UnitCreature>();
 
-        this.returnBuffer = new List<UnitCreature>();
+        returnBuffer = new List<UnitCreature>();
 
-        this.mapManager = GetComponent<MapManager>();
-        this.mapManager.Configure();
+        mapManager = GetComponent<MapManager>();
+        mapManager.Configure();
 
-        battleRoyale.Initialize(this.mapManager);
+        itemSpawner.Initialize(mapManager);
+
+        itemSpawner.SpawnItems(6);
+
+        battleRoyale.Initialize(mapManager);
 
         battleRoyale = FindFirstObjectByType<BattleRoyaleZoneManager>();
 
@@ -140,6 +147,9 @@ public class GameManager : MonoBehaviour
         if (currentMaster is IAMaster)
         {
             battleRoyale.OnIATurn();
+            
+            itemSpawner.SpawnItems(4);
+
             IAMaster ia = GetComponentInChildren<IAMaster>();
             ia.enemyCount= 3;
             ia.SpawnUnitCreatures(mapManager.iaSpawnPoints);
@@ -251,6 +261,7 @@ public class GameManager : MonoBehaviour
 
         List<Vector3> path = this.mapManager.PredictWorldPathFor(unitCreature.transform.position, targetPos);
         unitCreature.FollowPath(path.ToArray());
+
     }
 
     public bool ThereIsTargetInArea(List<Vector3> area)
@@ -296,39 +307,76 @@ public class GameManager : MonoBehaviour
         );
 
         this.TryToPerformItemSkillInArea(emitter, itemSkill, effectArea);
+        
     }
 
-    public void TryToPerformItemSkillInArea(UnitCreature emitter, ItemSkill itemSkill, List<Vector3> area)
+    public void TryToPerformItemSkillAtPoint( UnitCreature emitter,ItemInstance item,Vector3 point)
+    {
+        Vector3 targetPos = this.mapManager.SnapToTile(point);
+
+        ItemSkill skill = item.itemSkill;
+
+        List<Vector3> reachArea = this.mapManager.PredictAreaFor(
+            emitter.transform.position,
+            skill.range
+        );
+
+        bool isInArea = false;
+
+        foreach (var pos in reachArea)
+        {
+            if (pos == targetPos)
+            {
+                isInArea = true;
+                break;
+            }
+        }
+
+        if (!isInArea)
+        {
+            Debug.Log("Can't attack. Target is not in range.");
+            return;
+        }
+
+        List<Vector3> effectArea = this.mapManager.PredictAreaFor(
+            targetPos,
+            skill.area
+        );
+
+        TryToPerformInventoryItem(emitter, item, effectArea);
+    }
+
+    public bool TryToPerformItemSkillInArea(UnitCreature emitter,ItemSkill itemSkill,List<Vector3> area)
     {
         if (this.isGameOver)
         {
-            return;
+            return false;
         }
 
         if (this.IsOwnerOnTurn(emitter) == false)
         {
             Debug.LogWarning("It's not your turn!");
-            return;
+            return false;
         }
 
         if (emitter.CanExecuteItemSkill(itemSkill) == false)
         {
             Debug.LogWarning("Can't execute skill. No energy.");
-            return;
+            return false;
         }
 
         if (itemSkill.isSpawner)
         {
             emitter.ConsumeEnergyFor(itemSkill);
             itemSkill.ResolveAsSpawner(emitter, area);
-            return;
+            return false;
         }
 
 
         if (this.ThereIsTargetInArea(area) == false)
         {
             Debug.Log("There is no target to execute Skill");
-            return;
+            return false;
         }
 
         emitter.ConsumeEnergyFor(itemSkill);
@@ -340,7 +388,22 @@ public class GameManager : MonoBehaviour
             {
                 itemSkill.ResolveForReceiver(emitter, receiver);
             }
+            
         }
+        ItemViewerManager.current.Hide();
+        return true;
+    }
+
+    public bool TryToPerformInventoryItem(UnitCreature emitter,ItemInstance item,List<Vector3> area)
+    {
+        bool ok = TryToPerformItemSkillInArea( emitter, item.itemSkill,area);
+
+        if (ok)
+        {
+            emitter.UseInventoryItem(item);
+        }
+        ItemViewerManager.current.Hide();
+        return ok;
     }
 
     public bool IsOwnerOnTurn(UnitCreature unitCreature)
@@ -361,5 +424,18 @@ public class GameManager : MonoBehaviour
 
             return masters[turnIndex] as PlayerMaster;
         }
+    }
+
+    public WorldItem FindItemAtPosition(Vector3 worldPos)
+    {
+        WorldItem[] items = FindObjectsOfType<WorldItem>();
+
+        foreach (WorldItem item in items)
+        {
+            if (mapManager.AreSameTile(item.transform.position, worldPos))
+                return item;
+        }
+
+        return null;
     }
 }
