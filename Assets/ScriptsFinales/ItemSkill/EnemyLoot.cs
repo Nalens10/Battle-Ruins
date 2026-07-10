@@ -8,6 +8,8 @@ public class EnemyLoot : MonoBehaviour
     
     // 2. El objeto de datos de la Cruz Bendita (el ScriptableObject del ítem/habilidad)
     public ItemSkill itemASoltar; 
+    
+    
 
     [Range(0f, 100f)]
     public float probabilidadDeDrop = 100f;
