@@ -309,6 +309,13 @@ public class UnitCreature : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
+        // Al estar en la misma carpeta, se comunican directamente sin errores
+        EnemyLoot botin = GetComponent<EnemyLoot>();
+        if (botin != null)
+        {
+            botin.SoltarItem();
+        }
+
         if (animator != null)
         {
             animator.SetTrigger("die");

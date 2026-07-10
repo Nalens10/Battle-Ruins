@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7276359186707907918}
   - component: {fileID: 1614415306386198147}
+  - component: {fileID: 8553536951571440886}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -58,8 +59,8 @@ MonoBehaviour:
     maxEnergy: 2
     attack: 3
     defense: 2
-    elemAttack: 0
-    elemDefense: 0
+    elemAttack: 1
+    elemDefense: 1
     accuracy: 4
     evasion: 2
     speed: 4
@@ -67,6 +68,21 @@ MonoBehaviour:
   maxInventory: 4
   currentUniqueCooldown: 0
   uniqueSkill: {fileID: 0}
+--- !u!114 &8553536951571440886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922257744384190501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a6d7e7fde0efbe4786d9cfba1f233fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldItemPrefab: {fileID: 5163372740563733008, guid: aec64f7aaa4caca40b4d2fb1bcb87d2e, type: 3}
+  itemASoltar: {fileID: 6973455744195030777, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+  probabilidadDeDrop: 100
 --- !u!1 &2407127824314094196
 GameObject:
   m_ObjectHideFlags: 0

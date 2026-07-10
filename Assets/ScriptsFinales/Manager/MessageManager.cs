@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -47,5 +48,10 @@ public class MessageManager : MonoBehaviour
         {
             listener.Receive(msg);
         }
+    }
+
+    internal void Send(UnitDeathMessage unitDeathMessage)
+    {
+        throw new NotImplementedException();
     }
 }

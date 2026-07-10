@@ -68,4 +68,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageType: 1
-  power: 20
+  power: 100
