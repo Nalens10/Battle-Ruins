@@ -41,6 +41,14 @@ public class ItemSkill : MonoBehaviour
         Debug.Log("==========");
         Debug.Log("Skill: " + itemSkillName);
 
+        // ESTO ES NUEVO: Le dice al personaje que LANZA la habilidad que haga la ANIMACIOOOOOOON
+        // Buscamos el componente Animator en el emisor o sus hijos visuales
+        Animator emitterAnimator = emitter.GetComponentInChildren<Animator>();
+        if (emitterAnimator != null)
+        {
+            emitterAnimator.SetTrigger("attack");
+        }
+        
         if (effects == null)
         {
             Debug.LogError("effects == NULL");

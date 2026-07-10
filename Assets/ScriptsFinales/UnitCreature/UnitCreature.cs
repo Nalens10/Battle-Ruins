@@ -29,6 +29,17 @@ public class UnitCreature : MonoBehaviour
 
     public UniqueItemSkill uniqueSkill;
 
+    // Nuevas variables para la animacion 
+
+    private Animator animator;
+    private bool isDead = false;
+
+
+    void Awake() {
+        // Busca el componente Animator en este objeto o en sus hijos
+        animator = GetComponentInChildren<Animator>();
+    }
+    
     void Start()
     {
         this.isMoving = false;
@@ -79,12 +90,15 @@ public class UnitCreature : MonoBehaviour
 
         if (this.stats.hp == 0)
         {
+            TriggerDeathAnimation(); // ESTO ES NUEVO, dispara la animacion antes dea visar al master, creo
             this.master.OnUnitCreatureDeath(this);
         }
     }
 
     public int DamageWithClamp(int amount)
     {
+        if (isDead) return 0; // Si ya está muerto, no recibe daño
+
         int targetHp = Mathf.Clamp(this.stats.hp - amount, 0,this.stats.maxhp);
 
         int damageTaken = this.stats.hp - targetHp;
@@ -93,6 +107,7 @@ public class UnitCreature : MonoBehaviour
 
         if (this.stats.hp <= 0)
         {
+            TriggerDeathAnimation(); // ESTO ES NUEVO: Dispara la animación antes de avisar al master
             this.master.OnUnitCreatureDeath(this);
         }
 
@@ -101,10 +116,19 @@ public class UnitCreature : MonoBehaviour
 
     public int Heal(int amount)
     {
+        // ES NUEVO
+        if (isDead) return 0;
+
         int targetHp = Mathf.Clamp(this.stats.hp + amount, 1, this.stats.maxhp);
         int healed = targetHp - this.stats.hp;
 
         this.stats.hp = targetHp;
+
+        // ESTO ES NUEVO LLAMA A LA ANIMACION ATACAR
+        if (healed > 0 && animator != null)
+        {
+            animator.SetTrigger("attack"); 
+        }
 
         return healed;
     }
@@ -165,6 +189,7 @@ public class UnitCreature : MonoBehaviour
 
     public void FollowPath(Vector3[] worldPath)
     {
+        if (isDead) return; // Si está muerto no se mueve
         StopAllCoroutines();
         StartCoroutine(this.FollowPathRutine(worldPath));
     }
@@ -172,6 +197,9 @@ public class UnitCreature : MonoBehaviour
     private IEnumerator FollowPathRutine(Vector3[] worldPath)
     {
         this.isMoving = true;
+
+        // SE ACTIVA LA ANIMACION DE CAMINAR
+        if (animator != null) animator.SetBool("isMoving", true);
 
         int pathLength = Mathf.Min(this.CurrentMaxDistance(), worldPath.Length);
         int cost = this.GetEnergyCostForPathLength(pathLength);
@@ -200,14 +228,18 @@ public class UnitCreature : MonoBehaviour
 
         this.isMoving = false;
 
-        // Buscar un item en la casilla donde termin�
+
+        // SE VUELVE A LA ANIMACION DE IDLE, CREO
+        if (animator != null) animator.SetBool("isMoving", false);
+
+        // Buscar un item en la casilla donde termin�
         WorldItem worldItem = GameManager.current.FindItemAtPosition(transform.position);
 
         if (worldItem != null)
         {
             if (AddItem(worldItem.itemSkill))
             {
-                Debug.Log("Recogi�: " + worldItem.itemSkill.itemSkillName);
+                Debug.Log("Recogi�: " + worldItem.itemSkill.itemSkillName);
 
                 ItemSpawnerManager spawner = FindObjectOfType<ItemSpawnerManager>();
 
@@ -271,5 +303,15 @@ public class UnitCreature : MonoBehaviour
     {
         currentUniqueCooldown = uniqueSkill.cooldownTurns;
     }
+    //  NUEVO: Ejecuta el trigger 'die' en el animator
+    private void TriggerDeathAnimation()
+    {
+        if (isDead) return;
+        isDead = true;
 
+        if (animator != null)
+        {
+            animator.SetTrigger("die");
+        }
+    }
 }
