@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 // Les dejo en verde lo que hace ;)
 public class GameManager : MonoBehaviour

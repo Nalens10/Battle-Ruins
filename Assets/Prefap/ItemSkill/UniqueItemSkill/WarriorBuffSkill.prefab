@@ -86,7 +86,7 @@ MonoBehaviour:
   gfx: {fileID: 0}
   filterType: 0
   typesFilter: 
-  turnCount: -1
+  turnCount: 10
   attack: 3
   defense: 0
   accuracy: 0
