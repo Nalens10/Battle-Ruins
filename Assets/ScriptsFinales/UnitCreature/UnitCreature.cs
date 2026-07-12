@@ -153,11 +153,11 @@ public class UnitCreature : MonoBehaviour
         }
     }
 
-    public void AddStatusCondition(StatusCondition condition)
+    public void AddStatusCondition(StatusCondition condition, ElementalType element = ElementalType.NONE)
     {
         Debug.Log("Agregando condición: " + condition.conditionName);
 
-        condition.Configure(this);
+        condition.Configure(this, element);
 
         Debug.Log("Remaining Turns: " + condition.remainingTurns);
 
@@ -167,6 +167,14 @@ public class UnitCreature : MonoBehaviour
         condition.transform.SetParent(transform);
 
         MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
+    }
+
+    public void RemoveStatusCondition(StatusCondition condition)
+    {
+        if (this.conditions.Remove(condition))
+        {
+            Destroy(condition.gameObject);
+        }
     }
 
     public int CurrentMaxDistance()
