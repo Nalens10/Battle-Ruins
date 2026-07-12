@@ -35,11 +35,12 @@ public class UnitCreature : MonoBehaviour
     private bool isDead = false;
 
 
-    void Awake() {
+    void Awake()
+    {
         // Busca el componente Animator en este objeto o en sus hijos
         animator = GetComponentInChildren<Animator>();
     }
-    
+
     void Start()
     {
         this.isMoving = false;
@@ -99,7 +100,7 @@ public class UnitCreature : MonoBehaviour
     {
         if (isDead) return 0; // Si ya está muerto, no recibe daño
 
-        int targetHp = Mathf.Clamp(this.stats.hp - amount, 0,this.stats.maxhp);
+        int targetHp = Mathf.Clamp(this.stats.hp - amount, 0, this.stats.maxhp);
 
         int damageTaken = this.stats.hp - targetHp;
 
@@ -127,7 +128,7 @@ public class UnitCreature : MonoBehaviour
         // ESTO ES NUEVO LLAMA A LA ANIMACION ATACAR
         if (healed > 0 && animator != null)
         {
-            animator.SetTrigger("attack"); 
+            animator.SetTrigger("attack");
         }
 
         return healed;
@@ -142,7 +143,7 @@ public class UnitCreature : MonoBehaviour
         for (int i = 0; i < this.conditions.Count; i++)
         {
             StatusCondition cond = this.conditions[i];
-            cond.ApplyOnTurnStart(this.stats); 
+            cond.ApplyOnTurnStart(this.stats);
             cond.ConsumeOneTurn();
 
             if (cond.isDepleted)
@@ -154,10 +155,18 @@ public class UnitCreature : MonoBehaviour
 
     public void AddStatusCondition(StatusCondition condition)
     {
+        Debug.Log("Agregando condición: " + condition.conditionName);
+
+        condition.Configure(this);
+
+        Debug.Log("Remaining Turns: " + condition.remainingTurns);
+
         this.conditions.Add(condition);
 
-        condition.transform.position = this.transform.position;
-        condition.transform.SetParent(this.transform);
+        condition.transform.position = transform.position;
+        condition.transform.SetParent(transform);
+
+        MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
     }
 
     public int CurrentMaxDistance()
@@ -232,27 +241,27 @@ public class UnitCreature : MonoBehaviour
         // SE VUELVE A LA ANIMACION DE IDLE, CREO
         if (animator != null) animator.SetBool("isMoving", false);
 
+        yield return new WaitForEndOfFrame();
+
         // Buscar un item en la casilla donde termin�
         WorldItem worldItem = GameManager.current.FindItemAtPosition(transform.position);
+
+        Debug.Log(worldItem);
 
         if (worldItem != null)
         {
             if (AddItem(worldItem.itemSkill))
             {
-                Debug.Log("Recogi�: " + worldItem.itemSkill.itemSkillName);
-
                 ItemSpawnerManager spawner = FindObjectOfType<ItemSpawnerManager>();
 
                 if (spawner != null)
-                {
                     spawner.RemoveItem(worldItem);
-                }
 
                 Destroy(worldItem.gameObject);
             }
             else
             {
-                Debug.Log("Inventario lleno.");
+                InventoryReplaceMenu.current.Show(this, worldItem);
             }
         }
     }
@@ -271,6 +280,12 @@ public class UnitCreature : MonoBehaviour
 
     public bool AddItem(ItemSkill item)
     {
+        if (inventory.Count >= maxInventory)
+        {
+            Debug.Log("Inventario lleno.");
+            return false;
+        }
+
         ItemSkill copy = Instantiate(item);
 
         inventory.Add(new ItemInstance()
@@ -278,6 +293,8 @@ public class UnitCreature : MonoBehaviour
             itemSkill = copy,
             remainingUses = copy.maxUses
         });
+
+        MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
 
         return true;
     }
@@ -292,6 +309,8 @@ public class UnitCreature : MonoBehaviour
         }
 
         MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
+
+        Debug.Log("Consume uso");
     }
 
     public bool CanUseUniqueSkill()
@@ -320,5 +339,18 @@ public class UnitCreature : MonoBehaviour
         {
             animator.SetTrigger("die");
         }
+    }
+
+    public void ReplaceItem(int index, ItemSkill item)
+    {
+        ItemSkill copy = Instantiate(item);
+
+        inventory[index] = new ItemInstance()
+        {
+            itemSkill = copy,
+            remainingUses = copy.maxUses
+        };
+
+        MessageManager.current.Send(new UnitCreatureUpdatedMessage(this));
     }
 }

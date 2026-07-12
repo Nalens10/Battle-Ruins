@@ -44,6 +44,12 @@ public class CameraMove : MonoBehaviour
             this.SetZoom(this.cameraComp.orthographicSize + zoomDelta);
         }
 
+        // Para centrar la cámara en el jugador actual
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            FocusCurrentPlayer();
+        }
+
     }
 
     public void SetZoom(float nextZoom)
@@ -51,4 +57,21 @@ public class CameraMove : MonoBehaviour
         this.cameraComp.orthographicSize = Mathf.Clamp(nextZoom, this.minZoom, this.maxZoom);
     }
 
+    public void FocusCurrentPlayer()
+    {
+        PlayerMaster player = GameManager.current.CurrentPlayer;
+
+        if (player == null)
+            return;
+
+        UnitCreature creature = player.CurrentUnit;
+
+        if (creature == null)
+            return;
+
+        transform.position = new Vector3(
+            creature.transform.position.x,
+            creature.transform.position.y,
+            transform.position.z);
+    }
 }

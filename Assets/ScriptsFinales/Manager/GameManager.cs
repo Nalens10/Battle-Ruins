@@ -151,6 +151,8 @@ public class GameManager : MonoBehaviour
             ia.enemyCount= 3;
             ia.SpawnUnitCreatures(mapManager.iaSpawnPoints);
         }
+
+        FindFirstObjectByType<CameraMove>()?.FocusCurrentPlayer();
     }
 
     protected void CheckForGameOver()
@@ -423,6 +425,8 @@ public class GameManager : MonoBehaviour
 
     public bool TryToPerformInventoryItem(UnitCreature emitter,ItemInstance item,List<Vector3> area)
     {
+        Debug.Log("TryToPerformInventoryItem");
+
         bool ok = TryToPerformItemSkillInArea( emitter, item.itemSkill,area);
 
         if (ok)
@@ -431,6 +435,7 @@ public class GameManager : MonoBehaviour
         }
         ItemViewerManager.current.Hide();
         return ok;
+
     }
 
     public bool IsOwnerOnTurn(UnitCreature unitCreature)
@@ -457,10 +462,17 @@ public class GameManager : MonoBehaviour
     {
         WorldItem[] items = FindObjectsOfType<WorldItem>();
 
+        Debug.Log("Buscando item en " + worldPos);
+
         foreach (WorldItem item in items)
         {
+            Debug.Log(item.name + " -> " + item.transform.position);
+
             if (mapManager.AreSameTile(item.transform.position, worldPos))
+            {
+                Debug.Log("ENCONTRADO");
                 return item;
+            }
         }
 
         return null;

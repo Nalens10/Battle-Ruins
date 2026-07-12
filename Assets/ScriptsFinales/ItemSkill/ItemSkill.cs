@@ -98,6 +98,8 @@ public class ItemSkill : MonoBehaviour
             GameObject go = Instantiate(this.vfx, receiver.transform.position, Quaternion.identity);
             Destroy(go, 2f);
         }
+
+        Debug.Log("Se ejecutó la habilidad");
     }
 
     public void ResolveAsSpawner(UnitCreature emitter, List<Vector3> area)

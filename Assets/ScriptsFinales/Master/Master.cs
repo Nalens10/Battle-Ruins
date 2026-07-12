@@ -9,6 +9,8 @@ public abstract class Master : MonoBehaviour
 
     protected List<UnitCreature> unitCreatures = new List<UnitCreature>();
 
+    public UnitCreature CurrentUnit => unitCreatures.Count > 0 ? unitCreatures[0] : null;
+
     public abstract void SpawnUnitCreatures(List<Vector3> spawnPoints);
   
 

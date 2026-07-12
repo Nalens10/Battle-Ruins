@@ -44,7 +44,14 @@ public class PlayerMaster : Master, IMessageListener
 
     public void OnSelectionRequested(Vector3 worldPos)
     {
-        this.GoToMoveMode();
+        if (status == PlayerCombatStatus.ITEMSKILL)
+        {
+            // no cambiar de modo
+        }
+        else
+        {
+            GoToMoveMode();
+        }
 
         Vector3 targetPos = GameManager.current.mapManager.SnapToTile(worldPos);
 

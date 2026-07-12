@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2450311011744538664}
   - component: {fileID: 4619366627134726279}
   - component: {fileID: 4109169624972935336}
-  - component: {fileID: 3502819859109443158}
   m_Layer: 0
   m_Name: WarriorBuffSkill
   m_TagString: Untagged
@@ -31,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 993.9302, y: 576.9759, z: 2.8286722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 209734437104753724}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4619366627134726279
@@ -69,14 +69,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7842ee54d93525e42bddc4b553650a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buff: {fileID: 3502819859109443158}
---- !u!114 &3502819859109443158
+  buff: {fileID: 8300403532453821865}
+--- !u!1 &8886310215286728657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 209734437104753724}
+  - component: {fileID: 8300403532453821865}
+  m_Layer: 0
+  m_Name: StatsModCondition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &209734437104753724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886310215286728657}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2450311011744538664}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8300403532453821865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3674616709584499646}
+  m_GameObject: {fileID: 8886310215286728657}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 466bf5cdc2cda3a4ba73c001b1e7aadc, type: 3}
@@ -86,7 +118,7 @@ MonoBehaviour:
   gfx: {fileID: 0}
   filterType: 0
   typesFilter: 
-  turnCount: 10
+  turnCount: 8
   attack: 3
   defense: 0
   accuracy: 0

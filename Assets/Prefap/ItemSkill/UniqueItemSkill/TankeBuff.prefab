@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1494099524206624957
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 43508731325378176}
+  - component: {fileID: 6959253982168984105}
+  m_Layer: 0
+  m_Name: StatsModCondition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &43508731325378176
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494099524206624957}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8820965449301011723}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6959253982168984105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1494099524206624957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 466bf5cdc2cda3a4ba73c001b1e7aadc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditionName: Refuerzo
+  gfx: {fileID: 0}
+  filterType: 0
+  typesFilter: 
+  turnCount: 8
+  attack: 0
+  defense: 1
+  accuracy: 0
+  evasion: 0
+  elemAttack: 0
+  elemDefense: 1
+  speed: 0
 --- !u!1 &2769521087726929436
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +67,6 @@ GameObject:
   - component: {fileID: 8820965449301011723}
   - component: {fileID: 7575364774177467198}
   - component: {fileID: 6985795056504312439}
-  - component: {fileID: 1229331371778108506}
   m_Layer: 0
   m_Name: TankeBuff
   m_TagString: Untagged
@@ -31,7 +86,8 @@ Transform:
   m_LocalPosition: {x: 993.9302, y: 576.9759, z: 2.8286722}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 43508731325378176}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7575364774177467198
@@ -69,28 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7842ee54d93525e42bddc4b553650a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buff: {fileID: 1229331371778108506}
---- !u!114 &1229331371778108506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2769521087726929436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 466bf5cdc2cda3a4ba73c001b1e7aadc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  conditionName: Refuerzo
-  gfx: {fileID: 0}
-  filterType: 0
-  typesFilter: 
-  turnCount: 10
-  attack: 0
-  defense: 1
-  accuracy: 0
-  evasion: 0
-  elemAttack: 0
-  elemDefense: 1
-  speed: 0
+  buff: {fileID: 6959253982168984105}

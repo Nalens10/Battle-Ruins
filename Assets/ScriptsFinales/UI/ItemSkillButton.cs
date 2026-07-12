@@ -20,29 +20,71 @@ public class ItemSkillButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         itemSkill = skill;
         itemInstance = null;
 
-        label.text = text;
+        if (label != null)
+            label.text = text;
 
-        btn.onClick.RemoveAllListeners();
-        btn.onClick.AddListener(onClick);
+        if (btn != null)
+        {
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(onClick);
+        }
 
-        itemSkillCost.gameObject.SetActive(true);
-        itemSkillCost.text = "Cost: " + skill.cost;
+        if (itemSkillCost != null)
+        {
+            if (skill != null)
+            {
+                itemSkillCost.gameObject.SetActive(true);
+                itemSkillCost.text = "Cost: " + skill.cost;
+            }
+            else
+            {
+                itemSkillCost.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void Configure(string text, UnityAction onClick, ItemInstance item)
     {
         itemInstance = item;
-        itemSkill = item.itemSkill;
+        itemSkill = item != null ? item.itemSkill : null;
+
+        if (label != null)
+            label.text = text;
+
+        if (btn != null)
+        {
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(onClick);
+        }
+
+        if (itemSkillCost != null)
+        {
+            if (item != null && item.itemSkill != null)
+            {
+                itemSkillCost.gameObject.SetActive(true);
+                itemSkillCost.text =
+                    "Cost: " + item.itemSkill.cost +
+                    "\nUses: " + item.remainingUses;
+            }
+            else
+            {
+                itemSkillCost.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void ConfigureReplace(string text, UnityAction onClick)
+    {
+        itemSkill = null;
+        itemInstance = null;
 
         label.text = text;
 
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(onClick);
 
-        itemSkillCost.gameObject.SetActive(true);
-        itemSkillCost.text =
-            "Cost: " + item.itemSkill.cost +
-            "\nUses: " + item.remainingUses;
+        if (itemSkillCost != null)
+            itemSkillCost.gameObject.SetActive(false);
     }
 
     public void ConfigureUniqueSkill(string text, UnityAction onClick, UniqueItemSkill skill, UnitCreature owner)
@@ -81,10 +123,7 @@ public class ItemSkillButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         Debug.Log(ItemViewerManager.current);
 
         if (ItemViewerManager.current == null)
-        {
-            Debug.LogError("ItemViewerManager.current es NULL");
             return;
-        }
 
         if (itemInstance != null)
             ItemViewerManager.current.Show(itemInstance);
@@ -94,6 +133,7 @@ public class ItemSkillButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void OnDeselect(BaseEventData eventData)
     {
-        ItemViewerManager.current.Hide();
+        if (ItemViewerManager.current != null)
+            ItemViewerManager.current.Hide();
     }
 }

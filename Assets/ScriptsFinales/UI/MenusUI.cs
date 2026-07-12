@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class MenusUI: MonoBehaviour
 {
+
     // Main Menu
     public void Play()
     {
@@ -23,6 +24,10 @@ public class MenusUI: MonoBehaviour
 
     // Options Menu
     [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Slider volumeSlider;
+    private float ultimoVolumen = 0f;
+    private bool muteado = false;
+
     public void FullScreen(bool pantallaCompleta)
     {
         Debug.Log("Cambio de Pantalla...");
@@ -32,6 +37,7 @@ public class MenusUI: MonoBehaviour
     public void ChangeVolume(float volumen)
     {
         Debug.Log("Cambio de Volumen...");
+        ultimoVolumen = volumen;
         audioMixer.SetFloat("Volumen", volumen);
     }
 
@@ -39,6 +45,21 @@ public class MenusUI: MonoBehaviour
     {
         Debug.Log("Cambio de Calidad...");
         QualitySettings.SetQualityLevel(calidad);
+    }
+
+    public void ChangeMute()
+    {
+        if (!muteado)
+        {
+            audioMixer.GetFloat("Volumen", out ultimoVolumen);
+            audioMixer.SetFloat("Volumen", -80f);
+        }
+        else
+        {
+            audioMixer.SetFloat("Volumen", ultimoVolumen);
+        }
+
+        muteado = !muteado;
     }
 
     // Pause Menu
@@ -61,6 +82,6 @@ public class MenusUI: MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    
+
 
 }

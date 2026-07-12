@@ -16,6 +16,7 @@ public class EnemyLoot : MonoBehaviour
 
     public void SoltarItem()
     {
+
         if (worldItemPrefab == null || itemASoltar == null)
         {
             Debug.LogError("[DROP ZOMBIE] ERROR: Asegúrate de asignar el 'WorldItemPrefab' y el 'ItemASoltar' en el Inspector.");
@@ -47,6 +48,7 @@ public class EnemyLoot : MonoBehaviour
             }
 
             Debug.Log($"[DROP SEGURO] ¡Éxito! Se creó el WorldItem con el sprite de {itemASoltar.name} en el tablero.");
+            Debug.Log("DROP en " + clonItem.transform.position);
         }
     }
 }

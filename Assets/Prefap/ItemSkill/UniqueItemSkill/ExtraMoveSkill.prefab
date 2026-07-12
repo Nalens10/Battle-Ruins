@@ -55,7 +55,7 @@ MonoBehaviour:
   vfx: {fileID: 0}
   elementalType: 0
   isSpawner: 0
-  cooldownTurns: 3
+  cooldownTurns: 2
 --- !u!114 &7901916733143997687
 MonoBehaviour:
   m_ObjectHideFlags: 0
