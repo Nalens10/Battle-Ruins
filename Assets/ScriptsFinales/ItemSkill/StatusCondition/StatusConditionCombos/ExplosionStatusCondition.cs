@@ -13,7 +13,7 @@ public class ExplosionStatusCondition : StatusCondition
 
     protected override void ExecuteOnTurnStart(Stats targetStats)
     {
-        int damage = Mathf.RoundToInt(this.damagePercent * this.criticalMultiplier * (float)targetStats.maxhp);
+        int damage = Mathf.RoundToInt(damagePercent * stacks * targetStats.maxhp); 
         int damageTaken = this.targetUnitCreature.DamageWithClamp(damage);
 
         if (damageTaken != 0)

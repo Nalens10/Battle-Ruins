@@ -155,6 +155,21 @@ public class UnitCreature : MonoBehaviour
 
     public void AddStatusCondition(StatusCondition condition, ElementalType element = ElementalType.NONE)
     {
+        foreach (StatusCondition existing in conditions)
+        {
+            if (existing.GetType() == condition.GetType())
+            {
+                existing.AddStack();
+
+                Destroy(condition.gameObject);
+
+                MessageManager.current.Send(
+                    new UnitCreatureUpdatedMessage(this));
+
+                return;
+            }
+        }
+
         Debug.Log("Agregando condición: " + condition.conditionName);
 
         condition.Configure(this, element);
