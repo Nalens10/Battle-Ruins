@@ -81,8 +81,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldItemPrefab: {fileID: 5163372740563733008, guid: aec64f7aaa4caca40b4d2fb1bcb87d2e, type: 3}
-  itemASoltar: {fileID: 6973455744195030777, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-  probabilidadDeDrop: 100
+  listaDeDrops:
+  - nombreIdentificador: CruzBendita
+    itemASoltar: {fileID: 6973455744195030777, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+    probabilidad: 42.9
+  - nombreIdentificador: Baston de Hielo
+    itemASoltar: {fileID: 7470484432310644515, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+    probabilidad: 55.9
+  - nombreIdentificador: Bomba De Veneno
+    itemASoltar: {fileID: 7875901429208946278, guid: ae589abc32c16a147a432fca07de7d2f, type: 3}
+    probabilidad: 79.5
+  - nombreIdentificador: Flecha Llameante
+    itemASoltar: {fileID: 679007385026569210, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+    probabilidad: 66.5
 --- !u!1 &2407127824314094196
 GameObject:
   m_ObjectHideFlags: 0
