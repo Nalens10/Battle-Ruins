@@ -6,7 +6,7 @@ public class LossEnergyStatusCondition : StatusCondition
 {
     protected override void ExecuteOnTurnStart(Stats targetStats)
     {
-        int impediment = Random.Range(0, 2);
+        int impediment = Random.Range(0, 1);
         targetStats.energy -= impediment;
     }
 

@@ -51,9 +51,9 @@ MonoBehaviour:
   maxUses: 1
   cost: 1
   range: 3
-  area: 2
+  area: 1
   distancePenalizationMultiplier: 0.1
-  vfx: {fileID: 172378031835797992, guid: f16bb268a7ca98e4fa5b1f19b1e7c973, type: 3}
+  vfx: {fileID: 172378031835797992, guid: 88918c711aa3d4b4c8c343d7c973c48f, type: 3}
   elementalType: 5
   isSpawner: 1
 --- !u!114 &2553233561830267951

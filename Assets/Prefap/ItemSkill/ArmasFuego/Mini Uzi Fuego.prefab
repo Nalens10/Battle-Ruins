@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3198718606531060342
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9184812571988804443}
+  - component: {fileID: 8397828913766759634}
+  - component: {fileID: 1058594730856058202}
+  - component: {fileID: 2397775555755245631}
+  m_Layer: 0
+  m_Name: Mini Uzi Fuego
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9184812571988804443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198718606531060342}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2615493884314868582}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8397828913766759634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198718606531060342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSkillName: Mini Uzi de Fuego
+  worldSprite: {fileID: 21300000, guid: c1bf9b9788672284f9af3dde0916fbad, type: 3}
+  maxUses: 4
+  cost: 1
+  range: 5
+  area: 0
+  distancePenalizationMultiplier: 0.1
+  vfx: {fileID: 172378031835797992, guid: 9a6be5c4b945f59459262ba9dd07f9c7, type: 3}
+  elementalType: 1
+  isSpawner: 0
+--- !u!114 &1058594730856058202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198718606531060342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  power: 50
+--- !u!114 &2397775555755245631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198718606531060342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1530d1bfb6abe744b7beb445324516a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &4683073903735627704
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 9184812571988804443}
+    m_Modifications:
+    - target: {fileID: 2973149236834562906, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_Name
+      value: Quemado
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1056.5216
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 520.7103
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.3174324
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+--- !u!4 &2615493884314868582 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7255729131136681182, guid: 8a18f34a1ada7d74dac184eb7db03178, type: 3}
+  m_PrefabInstance: {fileID: 4683073903735627704}
+  m_PrefabAsset: {fileID: 0}

@@ -160,6 +160,7 @@ public class UnitCreature : MonoBehaviour
             if (existing.GetType() == condition.GetType())
             {
                 existing.AddStack();
+                condition.Configure(this, element);
 
                 Destroy(condition.gameObject);
 

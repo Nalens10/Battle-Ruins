@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
             itemSpawner.SpawnItems(4);
 
             IAMaster ia = GetComponentInChildren<IAMaster>();
-            ia.enemyCount= 3;
+            ia.enemyCount= 4;
             ia.SpawnUnitCreatures(mapManager.iaSpawnPoints);
         }
 

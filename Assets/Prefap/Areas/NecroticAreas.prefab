@@ -52,4 +52,4 @@ MonoBehaviour:
   typesFilter: 0100000002000000030000000400000005000000
   turnCount: 1
   damagePercent: 0.05
-  onApplyVfx: {fileID: 172378031835797992, guid: c713b439409f6554e934ef211e15c3e6, type: 3}
+  onApplyVfx: {fileID: 4341432140021429574, guid: 44707c7aea2551945b93f14bb5d1eb1f, type: 3}

@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3517902984220039180
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7872607811228787248}
+  - component: {fileID: 5540243940499533738}
+  - component: {fileID: 5701597078637191139}
+  - component: {fileID: 8583344143937587763}
+  m_Layer: 0
+  m_Name: Mini Uzi Agua
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7872607811228787248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517902984220039180}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8956664421370579981}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5540243940499533738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517902984220039180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSkillName: Mini Uzi de Agua
+  worldSprite: {fileID: 21300000, guid: 4bfd6dbdf9c89ac45b88890e8ad11504, type: 3}
+  maxUses: 4
+  cost: 1
+  range: 5
+  area: 0
+  distancePenalizationMultiplier: 0.1
+  vfx: {fileID: 5315211935279976213, guid: 833c7686d3e273c48b5221e6283dd55f, type: 3}
+  elementalType: 2
+  isSpawner: 0
+--- !u!114 &5701597078637191139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517902984220039180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  power: 50
+--- !u!114 &8583344143937587763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3517902984220039180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1530d1bfb6abe744b7beb445324516a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &2336395454591574515
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7872607811228787248}
+    m_Modifications:
+    - target: {fileID: 1284587841771051642, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_Name
+      value: Humedo
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1056.5216
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 520.7103
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.3174324
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+--- !u!4 &8956664421370579981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6638584713271897598, guid: bdd72dc6547fb374cbab6ee04c50a955, type: 3}
+  m_PrefabInstance: {fileID: 2336395454591574515}
+  m_PrefabAsset: {fileID: 0}

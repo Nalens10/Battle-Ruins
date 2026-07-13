@@ -9,7 +9,7 @@ public class IAMaster : Master
 
     protected UnitCreature lastTarget;
 
-    public int enemyCount=6;
+    public int enemyCount=8;
 
     public override void BeginTurn()
     {

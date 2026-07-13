@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7804631531067317272
+--- !u!1 &394942477984473790
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1139844524936231061}
-  - component: {fileID: 679007385026569210}
-  - component: {fileID: 9030405405699034685}
+  - component: {fileID: 5430770231187708888}
+  - component: {fileID: 3162574494368239791}
+  - component: {fileID: 340293932636821395}
   m_Layer: 0
-  m_Name: Flecha LLameante
+  m_Name: "Rev\xF3lverRayo"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1139844524936231061
+--- !u!4 &5430770231187708888
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7804631531067317272}
+  m_GameObject: {fileID: 394942477984473790}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -33,39 +33,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &679007385026569210
+--- !u!114 &3162574494368239791
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7804631531067317272}
+  m_GameObject: {fileID: 394942477984473790}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSkillName: Flecha LLameante
-  worldSprite: {fileID: 21300000, guid: 5f755e6e5429b0a4b9a90b63924b4d92, type: 3}
-  maxUses: 3
+  itemSkillName: "Rev\xF3lver de Rayo"
+  worldSprite: {fileID: 21300000, guid: 1c0a9d1c6edd9744c94dba4020bb9808, type: 3}
+  maxUses: 5
   cost: 1
-  range: 7
+  range: 5
   area: 0
   distancePenalizationMultiplier: 0.1
-  vfx: {fileID: 172378031835797992, guid: 9a6be5c4b945f59459262ba9dd07f9c7, type: 3}
-  elementalType: 1
+  vfx: {fileID: 7515758117576746135, guid: fd7b608bc90e9e3458953ceac3f16487, type: 3}
+  elementalType: 3
   isSpawner: 0
---- !u!114 &9030405405699034685
+--- !u!114 &340293932636821395
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7804631531067317272}
+  m_GameObject: {fileID: 394942477984473790}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 2
-  power: 100
+  damageType: 0
+  power: 30

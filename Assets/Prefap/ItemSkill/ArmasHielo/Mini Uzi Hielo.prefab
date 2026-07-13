@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1251957022285298695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 628504213928236693}
+  - component: {fileID: 4968946287407750159}
+  - component: {fileID: 3436853133619265322}
+  - component: {fileID: 6051378865676218448}
+  m_Layer: 0
+  m_Name: Mini Uzi Hielo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &628504213928236693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251957022285298695}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1752345685014896913}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4968946287407750159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251957022285298695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSkillName: Mini Uzi de Hielo
+  worldSprite: {fileID: 21300000, guid: db8c6a223b73e7849b7bd9c1386fd3e2, type: 3}
+  maxUses: 4
+  cost: 1
+  range: 5
+  area: 0
+  distancePenalizationMultiplier: 0.1
+  vfx: {fileID: 5730500251543410589, guid: 08beb8ff62f4df048ae8e9e09033bb50, type: 3}
+  elementalType: 4
+  isSpawner: 0
+--- !u!114 &3436853133619265322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251957022285298695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageType: 2
+  power: 50
+--- !u!114 &6051378865676218448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1251957022285298695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1530d1bfb6abe744b7beb445324516a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &7408118908935622284
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 628504213928236693}
+    m_Modifications:
+    - target: {fileID: 3705408825400121369, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_Name
+      value: Congelado
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1056.5216
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 520.7103
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.3174324
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+--- !u!4 &1752345685014896913 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9124145477946060701, guid: e79c91ba3a5048c4cabc9320ffefbc25, type: 3}
+  m_PrefabInstance: {fileID: 7408118908935622284}
+  m_PrefabAsset: {fileID: 0}

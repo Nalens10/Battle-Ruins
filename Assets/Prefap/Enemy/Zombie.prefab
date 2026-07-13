@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionIndicator: {fileID: 2835328817911158022}
-  movementSpeed: 2.5
+  movementSpeed: 3
   master: {fileID: 0}
   stats:
-    elementalType: 4
+    elementalType: 0
     hp: 35
     maxhp: 35
     energy: 2
@@ -84,16 +84,25 @@ MonoBehaviour:
   listaDeDrops:
   - nombreIdentificador: CruzBendita
     itemASoltar: {fileID: 6973455744195030777, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-    probabilidad: 42.9
+    probabilidad: 60
+  - nombreIdentificador: "Rev\xF3lver "
+    itemASoltar: {fileID: 3162574494368239791, guid: 6f1305acdc0b89a45b7c5dfadaa49768, type: 3}
+    probabilidad: 60
+  - nombreIdentificador: Uzi
+    itemASoltar: {fileID: 5540243940499533738, guid: fccf1eb35c446bc479c87fe9f86e77b5, type: 3}
+    probabilidad: 40
+  - nombreIdentificador: Escopeta
+    itemASoltar: {fileID: 9157979212022924557, guid: ae75dac65381d87448d0dec47e9eaef7, type: 3}
+    probabilidad: 50
+  - nombreIdentificador: 'Flecha '
+    itemASoltar: {fileID: 3103744523578512124, guid: 923875696627da94798fcff5f7afbc52, type: 3}
+    probabilidad: 30
   - nombreIdentificador: Baston de Hielo
     itemASoltar: {fileID: 7470484432310644515, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-    probabilidad: 55.9
-  - nombreIdentificador: Bomba De Veneno
+    probabilidad: 20
+  - nombreIdentificador: Bomba
     itemASoltar: {fileID: 7875901429208946278, guid: ae589abc32c16a147a432fca07de7d2f, type: 3}
-    probabilidad: 79.5
-  - nombreIdentificador: Flecha Llameante
-    itemASoltar: {fileID: 679007385026569210, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
-    probabilidad: 66.5
+    probabilidad: 20
 --- !u!1 &2407127824314094196
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +339,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2147701139438275091, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
       propertyPath: power
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -370,6 +379,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8012698952874041351, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: distancePenalizationMultiplier
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

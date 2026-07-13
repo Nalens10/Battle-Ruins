@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3861659066326690844
+--- !u!1 &4425755455780743860
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8828239580797360506}
-  - component: {fileID: 361661846298390543}
-  - component: {fileID: 5150314714167992122}
+  - component: {fileID: 7252757173843428175}
+  - component: {fileID: 7718617423969944891}
+  - component: {fileID: 2588105414393668576}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -18,28 +18,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8828239580797360506
+--- !u!4 &7252757173843428175
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3861659066326690844}
+  m_GameObject: {fileID: 4425755455780743860}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 769664769381496643}
+  m_Father: {fileID: 2573465610147030678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &361661846298390543
+--- !u!212 &7718617423969944891
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3861659066326690844}
+  m_GameObject: {fileID: 4425755455780743860}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 495c6890d6eac2a4f967d5f745b075e7, type: 3}
-  m_Color: {r: 0, g: 0.90621996, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.95681906, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,14 +85,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &5150314714167992122
+--- !u!95 &2588105414393668576
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3861659066326690844}
+  m_GameObject: {fileID: 4425755455780743860}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: f1c07389df3bd2d4fa67984f06a05f30, type: 2}
@@ -106,7 +106,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!1 &4306867322703840528
+--- !u!1 &5596766847331145401
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -114,68 +114,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1219444091237045810}
-  - component: {fileID: 5304777794887932076}
-  - component: {fileID: 4279161525860889272}
+  - component: {fileID: 8663043177899328566}
   m_Layer: 0
-  m_Name: Mordida
+  m_Name: ItemSkills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1219444091237045810
+--- !u!4 &8663043177899328566
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4306867322703840528}
+  m_GameObject: {fileID: 5596766847331145401}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 7584678234730425232}
+  m_Children:
+  - {fileID: 1479362148742378353}
+  m_Father: {fileID: 2573465610147030678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5304777794887932076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4306867322703840528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c1cbed1839f0284bbd103a006309b57, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemSkillName: Mordida
-  worldSprite: {fileID: 0}
-  maxUses: 1000
-  cost: 1
-  range: 1
-  area: 0
-  distancePenalizationMultiplier: 0.1
-  vfx: {fileID: 0}
-  elementalType: 4
-  isSpawner: 0
---- !u!114 &4279161525860889272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4306867322703840528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ded15a76aa2ac345887f99977c75eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageType: 0
-  power: 10
---- !u!1 &5264049008635553547
+--- !u!1 &7024285256144969840
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,8 +146,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2505590201034729515}
-  - component: {fileID: 9125498083091371263}
+  - component: {fileID: 1222414403806822065}
+  - component: {fileID: 5244499361221690984}
   m_Layer: 0
   m_Name: SelectionIndication
   m_TagString: Untagged
@@ -192,28 +155,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2505590201034729515
+--- !u!4 &1222414403806822065
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264049008635553547}
+  m_GameObject: {fileID: 7024285256144969840}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 769664769381496643}
+  m_Father: {fileID: 2573465610147030678}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &9125498083091371263
+--- !u!212 &5244499361221690984
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5264049008635553547}
+  m_GameObject: {fileID: 7024285256144969840}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -259,7 +222,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &5707013076542201977
+--- !u!1 &9154046016328141280
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,80 +230,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7584678234730425232}
+  - component: {fileID: 2573465610147030678}
+  - component: {fileID: 6658189862819113090}
+  - component: {fileID: 4690823519582790208}
   m_Layer: 0
-  m_Name: ItemSkills
+  m_Name: Zombie Hielo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7584678234730425232
+--- !u!4 &2573465610147030678
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5707013076542201977}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1219444091237045810}
-  m_Father: {fileID: 769664769381496643}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8428925530811570728
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 769664769381496643}
-  - component: {fileID: 8661330338756672654}
-  - component: {fileID: 1792697284784953083}
-  m_Layer: 0
-  m_Name: Zombie Ice
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &769664769381496643
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428925530811570728}
+  m_GameObject: {fileID: 9154046016328141280}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8828239580797360506}
-  - {fileID: 2505590201034729515}
-  - {fileID: 7584678234730425232}
+  - {fileID: 7252757173843428175}
+  - {fileID: 1222414403806822065}
+  - {fileID: 8663043177899328566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8661330338756672654
+--- !u!114 &6658189862819113090
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428925530811570728}
+  m_GameObject: {fileID: 9154046016328141280}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7261224a31f04e14a9baf3f5fa05e757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectionIndicator: {fileID: 5264049008635553547}
-  movementSpeed: 2.5
+  selectionIndicator: {fileID: 7024285256144969840}
+  movementSpeed: 3
   master: {fileID: 0}
   stats:
     elementalType: 4
@@ -359,18 +290,109 @@ MonoBehaviour:
   maxInventory: 4
   currentUniqueCooldown: 0
   uniqueSkill: {fileID: 0}
---- !u!114 &1792697284784953083
+--- !u!114 &4690823519582790208
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8428925530811570728}
+  m_GameObject: {fileID: 9154046016328141280}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a6d7e7fde0efbe4786d9cfba1f233fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   worldItemPrefab: {fileID: 5163372740563733008, guid: aec64f7aaa4caca40b4d2fb1bcb87d2e, type: 3}
-  itemASoltar: {fileID: 6973455744195030777, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
-  probabilidadDeDrop: 100
+  listaDeDrops:
+  - nombreIdentificador: CruzBendita
+    itemASoltar: {fileID: 6973455744195030777, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+    probabilidad: 60
+  - nombreIdentificador: "Rev\xF3lver "
+    itemASoltar: {fileID: 6556868311719152106, guid: aa3ca31b829b8f9409cea6a6cd6a18de, type: 3}
+    probabilidad: 60
+  - nombreIdentificador: Uzi
+    itemASoltar: {fileID: 4968946287407750159, guid: 34f1ad9cade6eb544a7361a8f05a5700, type: 3}
+    probabilidad: 40
+  - nombreIdentificador: Escopeta
+    itemASoltar: {fileID: 5795556443629187338, guid: c09207e8049714f4e9065eb1d3a30536, type: 3}
+    probabilidad: 50
+  - nombreIdentificador: 'Flecha '
+    itemASoltar: {fileID: 3271469535482932339, guid: 7351427ae0ad9934c9a5fdf162f70ae2, type: 3}
+    probabilidad: 30
+  - nombreIdentificador: Baston de Hielo
+    itemASoltar: {fileID: 7470484432310644515, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
+    probabilidad: 10
+--- !u!1001 &2506004200875351528
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8663043177899328566}
+    m_Modifications:
+    - target: {fileID: 2119393806341078459, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_Name
+      value: Mordida
+      objectReference: {fileID: 0}
+    - target: {fileID: 2147701139438275091, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: power
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8012698952874041351, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: elementalType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8012698952874041351, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+      propertyPath: distancePenalizationMultiplier
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+--- !u!4 &1479362148742378353 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3909368028570939033, guid: 11358589e45d7d14eb8f3b711d52b24d, type: 3}
+  m_PrefabInstance: {fileID: 2506004200875351528}
+  m_PrefabAsset: {fileID: 0}

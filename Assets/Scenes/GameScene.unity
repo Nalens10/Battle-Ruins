@@ -3116,7 +3116,7 @@ MonoBehaviour:
   moveSpeed: 6
   zoomSpeed: 35
   maxZoom: 10
-  minZoom: 4
+  minZoom: 2
 --- !u!1 &520699713
 GameObject:
   m_ObjectHideFlags: 0
@@ -9685,11 +9685,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapTilePairs:
   - type: 0
-    visualTile: {fileID: 11400000, guid: 32b1f6b2cbf81cd4892612e14d45f2e6, type: 2}
+    visualTile: {fileID: 11400000, guid: 48a5d2774d1f54a4aba2662036681ee9, type: 2}
   - type: 1
-    visualTile: {fileID: 11400000, guid: cb57a630bb01e9046aa9cca7970d9c8f, type: 2}
+    visualTile: {fileID: 11400000, guid: e1234edf04ce15a45967defa03e0c0a9, type: 2}
   - type: 2
-    visualTile: {fileID: 11400000, guid: cb57a630bb01e9046aa9cca7970d9c8f, type: 2}
+    visualTile: {fileID: 11400000, guid: ef36a15dd00cab4428c046b31081f827, type: 2}
   - type: 3
     visualTile: {fileID: 11400000, guid: cb57a630bb01e9046aa9cca7970d9c8f, type: 2}
   targetTilemap: {fileID: 1018997515}
@@ -9774,7 +9774,12 @@ MonoBehaviour:
   masterName: IA Master
   enemyPrefabs:
   - {fileID: 1922257744384190501, guid: 0e6fcd51fd5e1954a8f29c6b53bcce6a, type: 3}
-  enemyCount: 4
+  - {fileID: 5456820180755663485, guid: 367e972d533056a47bbeae1553f5eb1e, type: 3}
+  - {fileID: 1194236319337709795, guid: dfc0cce5c86d46d448740ed5c090d346, type: 3}
+  - {fileID: 9154046016328141280, guid: c42fda8b7eba71e4c9957d587a0ee988, type: 3}
+  - {fileID: 8625596085089361030, guid: aac12a10dee98884cb3a0c8a40890ad8, type: 3}
+  - {fileID: 4725350643654702260, guid: 0bd9f5d6bc42b9b459f28f408b8f0eae, type: 3}
+  enemyCount: 10
 --- !u!1 &1370268519
 GameObject:
   m_ObjectHideFlags: 0
@@ -10486,7 +10491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75d976413af7d224e9509943b40176f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapData: {fileID: 4900000, guid: b53db8b7d821fa64cbbbb8d64bf731da, type: 3}
+  mapData: {fileID: 4900000, guid: c34b37c770af0d341939960c3a6ee9dc, type: 3}
   playerSpawnPoints: []
   iaSpawnPoints: []
   dynamicObstacles: []
@@ -13311,10 +13316,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldItemPrefab: {fileID: 2926114343572785341, guid: aec64f7aaa4caca40b4d2fb1bcb87d2e, type: 3}
   possibleItems:
-  - {fileID: 7875901429208946278, guid: ae589abc32c16a147a432fca07de7d2f, type: 3}
-  - {fileID: 6973455744195030777, guid: 902bd296e9a453544a28b1677035fb2c, type: 3}
+  - {fileID: 3573726831005628077, guid: abf6720c01d90a44ea33b8ecaf298d32, type: 3}
+  - {fileID: 679007385026569210, guid: 22b7eeb15e27c8f4da649fedc9dc8f71, type: 3}
+  - {fileID: 6706062067871989010, guid: 2c4f63d90297f5643a426adabe376803, type: 3}
+  - {fileID: 3162574494368239791, guid: 6f1305acdc0b89a45b7c5dfadaa49768, type: 3}
+  - {fileID: 2786115533578947549, guid: 7713b767801e9b145bdeb0d680282032, type: 3}
+  - {fileID: 9045363597493363962, guid: f9882f9792af9bc46a30a4e7072e457d, type: 3}
+  - {fileID: 5540243940499533738, guid: fccf1eb35c446bc479c87fe9f86e77b5, type: 3}
+  - {fileID: 5988813798927084191, guid: 7716a68f110a78a41aca01e18e021d93, type: 3}
+  - {fileID: 453934822023141408, guid: c350bc112a4f9f54fa3f5f0d03c8d654, type: 3}
+  - {fileID: 3103744523578512124, guid: 923875696627da94798fcff5f7afbc52, type: 3}
+  - {fileID: 8397828913766759634, guid: a9ac19283e94563449ebef1631fb7648, type: 3}
+  - {fileID: 1999167985718039313, guid: 7e2c28013bb88ae4c83fb1c2d51162ca, type: 3}
   - {fileID: 7470484432310644515, guid: 603ab94664c04cc43b9027d208ef9323, type: 3}
-  - {fileID: 679007385026569210, guid: 4a5cb1764e07ce64588282ba5ff461b0, type: 3}
+  - {fileID: 5795556443629187338, guid: c09207e8049714f4e9065eb1d3a30536, type: 3}
+  - {fileID: 3271469535482932339, guid: 7351427ae0ad9934c9a5fdf162f70ae2, type: 3}
+  - {fileID: 4968946287407750159, guid: 34f1ad9cade6eb544a7361a8f05a5700, type: 3}
+  - {fileID: 6556868311719152106, guid: aa3ca31b829b8f9409cea6a6cd6a18de, type: 3}
+  - {fileID: 7875901429208946278, guid: ae589abc32c16a147a432fca07de7d2f, type: 3}
+  - {fileID: 9157979212022924557, guid: ae75dac65381d87448d0dec47e9eaef7, type: 3}
+  - {fileID: 8671850166061859223, guid: a0afc859548953446b984d2c8a1a88b5, type: 3}
+  - {fileID: 2758401629355900519, guid: 659ada2d86d039a46a98ecd97a9e6659, type: 3}
+  - {fileID: 385826167456029668, guid: 1d66c9fb4ff4637418f820d472d17d53, type: 3}
   maxItems: 5
 --- !u!1 &1988094885
 GameObject:

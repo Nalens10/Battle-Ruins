@@ -52,7 +52,7 @@ MonoBehaviour:
   range: 1
   area: 0
   distancePenalizationMultiplier: 0.1
-  vfx: {fileID: 0}
+  vfx: {fileID: 5324604404051496942, guid: e7df7880c33d5c24ca4d052d5412c9eb, type: 3}
   elementalType: 0
   isSpawner: 0
 --- !u!114 &2147701139438275091

@@ -44,12 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a57565d42ab16114e910c5e354590e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditionName: Veneno Zona
-  gfx: {fileID: 0}
+  conditionName: Veneno
+  gfx: {fileID: 5900585483435284265, guid: 97d6d8cd4f6265749b46a4d4620b1b65, type: 3}
   stacks: 1
   maxStacks: 5
   filterType: 0
   typesFilter: 05000000
   turnCount: 3
   damagePercent: 0.07
-  onApplyVfx: {fileID: 172378031835797992, guid: f16bb268a7ca98e4fa5b1f19b1e7c973, type: 3}
+  onApplyVfx: {fileID: 5900585483435284265, guid: 97d6d8cd4f6265749b46a4d4620b1b65, type: 3}
