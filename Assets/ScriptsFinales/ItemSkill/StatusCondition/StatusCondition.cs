@@ -17,6 +17,11 @@ public abstract class StatusCondition : MonoBehaviour
 
     public GameObject gfx;
 
+    protected ElementalType appliedElement = ElementalType.NONE;
+
+    public int stacks = 1;
+    public int maxStacks = 5;
+
     [Header("Immunities")]
     public StatusConditionFilterType filterType = StatusConditionFilterType.ARE_IMMUNE;
     public ElementalType[] typesFilter;
@@ -34,22 +39,25 @@ public abstract class StatusCondition : MonoBehaviour
         }
     }
 
-    public void Configure(UnitCreature targetUnitCreature)
+    public void Configure(UnitCreature targetUnitCreature, ElementalType element)
     {
         this.remainingTurns = this.turnCount;
         this.targetUnitCreature = targetUnitCreature;
+        this.appliedElement = element;
 
         if (this.IsUnitCreatureImmune())
         {
             this.remainingTurns = 0;
         }
-        else
+        else if (this.gfx != null)
         {
-            if (this.gfx != null)
-            {
-                this.gfx.SetActive(true);
-            }
+            this.gfx.SetActive(true);
         }
+    }
+
+    public void Configure(UnitCreature targetUnitCreature)
+    {
+        Configure(targetUnitCreature, ElementalType.NONE);
     }
 
     protected bool IsUnitCreatureImmune()
@@ -114,11 +122,13 @@ public abstract class StatusCondition : MonoBehaviour
         this.ExecuteStatsModifiers(targetStats);
     }
 
+    public virtual void AddStack()
+    {
+        stacks = Mathf.Min(stacks + 1, maxStacks);
+        remainingTurns++;
+    }
+
     protected abstract void ExecuteOnTurnStart(Stats targetStats);
     protected abstract void ExecuteStatsModifiers(Stats targetStats);
 
-    public void Refresh()
-    {
-        this.remainingTurns = this.turnCount;
-    }
 }

@@ -7,9 +7,10 @@ public class DamageStatusCondition : StatusCondition
     public float damagePercent = 0.2f;
     public GameObject onApplyVfx;
 
+
     protected override void ExecuteOnTurnStart(Stats targetStats)
     {
-        int damage = Mathf.RoundToInt(this.damagePercent * (float)targetStats.maxhp);
+        int damage = Mathf.RoundToInt(damagePercent * stacks *targetStats.maxhp);
 
         int damageTaken = this.targetUnitCreature.DamageWithClamp(damage);
         if (damageTaken != 0)

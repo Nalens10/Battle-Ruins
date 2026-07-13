@@ -14,7 +14,7 @@ public class ParalyzeStatusCondition : StatusCondition
         // pero total en vez de parcial) => no le alcanza para moverse ni usar items.
         targetStats.energy = 0;
 
-        int damage = Mathf.RoundToInt(this.damagePercent * (float)targetStats.maxhp);
+        int damage = Mathf.RoundToInt(damagePercent * stacks * targetStats.maxhp);
         int damageTaken = this.targetUnitCreature.DamageWithClamp(damage);
 
         if (damageTaken != 0)
