@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3899654892235930692}
   - component: {fileID: 4515756941587272425}
   m_Layer: 0
-  m_Name: Quemado
+  m_Name: "Da\xF1o Fuego"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4814,7 +4814,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -720416479
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
