@@ -21,23 +21,12 @@ public class StatusConditionEffect : MonoBehaviour, IEffect
 
     public void Resolve(UnitCreature emitter, UnitCreature receiver)
     {
-        foreach (var cond in this.conditions)
+        foreach (var cond in conditions)
         {
-            StatusCondition existing =
-                receiver.GetStatusCondition(cond.GetType());
-
-            if (existing != null)
-            {
-                existing.Refresh();
-                continue;
-            }
-
             GameObject parasiteObj = Instantiate(cond.gameObject);
 
             StatusCondition condition =
                 parasiteObj.GetComponent<StatusCondition>();
-
-            condition.Configure(receiver);
 
             receiver.AddStatusCondition(condition);
         }

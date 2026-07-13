@@ -4864,6 +4864,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uses: 999
   turnCount: 99
+  statusPrefab: {fileID: 8711323988753696228, guid: 5618f143af72d9240b4781345ee03dba, type: 3}
+  element: 0
 --- !u!1 &5111926132724866265
 GameObject:
   m_ObjectHideFlags: 0
@@ -4910,6 +4912,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   conditionName: Veneno Zona
   gfx: {fileID: 0}
+  stacks: 1
+  maxStacks: 5
   filterType: 0
   typesFilter: 0100000002000000030000000400000005000000
   turnCount: 1
