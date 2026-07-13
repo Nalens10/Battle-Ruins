@@ -15,6 +15,10 @@ public class StatusConditionArea : StatusConditionEffect, IMessageListener
     public int turnCount = 1;
     protected int remainingTurns;
 
+    public StatusCondition statusPrefab;
+
+    public ElementalType element = ElementalType.NONE;
+
     void Start()
     {
         this.remainingUses = this.uses;
@@ -58,19 +62,9 @@ public class StatusConditionArea : StatusConditionEffect, IMessageListener
     {
         remainingUses--;
 
-        int damage = Mathf.RoundToInt(target.stats.maxhp * 0.05f);
+        StatusCondition condition = Instantiate(statusPrefab);
 
-        int damageTaken = target.DamageWithClamp(damage);
-
-        if (damageTaken > 0)
-        {
-            MessageManager.current.Send(
-                new ItemSkillHealthModMessage(
-                    null,
-                    target,
-                    -damageTaken,
-                    false));
-        }
+        target.AddStatusCondition(condition, element);
     }
 
     public void Receive(Message msg)
