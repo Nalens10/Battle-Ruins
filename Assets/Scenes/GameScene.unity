@@ -13338,7 +13338,7 @@ MonoBehaviour:
   - {fileID: 8671850166061859223, guid: a0afc859548953446b984d2c8a1a88b5, type: 3}
   - {fileID: 2758401629355900519, guid: 659ada2d86d039a46a98ecd97a9e6659, type: 3}
   - {fileID: 385826167456029668, guid: 1d66c9fb4ff4637418f820d472d17d53, type: 3}
-  maxItems: 5
+  maxItems: 40
 --- !u!1 &1988094885
 GameObject:
   m_ObjectHideFlags: 0

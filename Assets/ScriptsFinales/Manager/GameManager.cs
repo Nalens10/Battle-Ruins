@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
         itemSpawner.Initialize(mapManager);
 
-        itemSpawner.SpawnItems(6);
+        itemSpawner.SpawnItems(10);
 
         battleRoyale.Initialize(mapManager);
 
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
         {
             battleRoyale.OnIATurn();
             
-            itemSpawner.SpawnItems(4);
+            itemSpawner.SpawnItems(6);
 
             IAMaster ia = GetComponentInChildren<IAMaster>();
             ia.enemyCount= 4;
