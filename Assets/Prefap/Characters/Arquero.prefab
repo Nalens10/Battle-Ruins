@@ -147,7 +147,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4691278226076522494}
   - component: {fileID: 5529856692295753563}
-  - component: {fileID: 6994775032777839124}
   - component: {fileID: 891243378017557204}
   m_Layer: 0
   m_Name: Arquero
@@ -206,27 +205,6 @@ MonoBehaviour:
   maxInventory: 4
   currentUniqueCooldown: 0
   uniqueSkill: {fileID: 0}
---- !u!95 &6994775032777839124
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3947856001648848478}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ce78762724ef4b40943dbceac73bcbb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &891243378017557204
 SpriteRenderer:
   m_ObjectHideFlags: 0
